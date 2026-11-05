@@ -1,1 +1,64 @@
 @import "tailwindcss";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/geist";
+
+@theme {
+    --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+    --font-geist: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+
+    --color-primary-hover: var(--primary-hover);
+    --color-secondary-hover: var(--secondary-hover);
+    --color-bg: var(--bg);
+    --color-bg-header: var(--bg-header);
+    --color-bg-secondary: var(--bg-secondary);
+    --color-tile: var(--tile);
+    --color-line: var(--line);
+    --color-line-selected: var(--line-selected);
+    --color-text: var(--text);
+    --color-text-secondary: var(--text-secondary);
+    --color-muted: var(--muted);
+    --color-primary: var(--primary);
+}
+
+@layer base {
+    :root {
+        --primary-hover: #ededed;
+        --secondary-hover: #313131;
+        --bg: #FAFAF9;
+        --bg-header: rgba(250, 250, 249, 0.796);
+        --bg-secondary: #0A0D0B;
+        --tile: #F1F3F0;
+        --line: #E2E6E1;
+        --line-selected: #0A0D0B;
+        --text: #111714;
+        --text-secondary: #FAFAF9;
+        --muted: #55605A;
+        --primary: #1999d0;
+    }
+
+    html, body {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    body {
+        background-color: var(--bg);
+        color: var(--text);
+        font-family: var(--font-inter);
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    h1, h2,h3, h4, h5, h6 {
+        font-family: var(--font-geist);
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+    }
+
+    p {
+        text-wrap: pretty;
+    }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
