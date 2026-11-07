@@ -1,8 +1,8 @@
 ---
 // import all the components for the tabs
-import Overview from "../layout/sections/Overview.astro";
-import Projects from "../layout/sections/Projects.astro";
-import Journey from "../layout/sections/Journey.astro";
+import Overview from "@components/layout/sections/Overview.astro";
+import Projects from "@components/layout/sections/Projects.astro";
+import Journey from "@components/layout/sections/Journey.astro";
 
 const tabs = [
   { id: "overview", label: "overview" },
@@ -24,17 +24,16 @@ const tabs = [
         role="tab"
         aria-controls={`panel-${tab.id}`}
         aria-selected={index === 0 ? "true" : "false"}
-        class="capitalize cursor-pointer text-muted flex-1 border-b-2 border-transparent text-sm
-        p-2 hover:bg-primary-hover hover:text-text hover:border-line transition-colors duration-300 ease-in-out
-        aria-selected:bg-primary-hover aria-selected:text-text group aria-selected:border-b-2 aria-selected:border-line-selected"
+        class="capitalize cursor-pointer text-muted flex-1 border-b-2 border-transparent text-sm font-medium
+        p-2 hover:bg-primary-hover hover:text-text hover:border-line transition-colors duration-300 ease-in-out aria-selected:font-semibold aria-selected:bg-primary-hover aria-selected:text-text group aria-selected:border-b-2 aria-selected:border-line-selected"
       >
         {tab.label}
       </button>
     ))
   }
 </div>
-<div class="">
-  <div id="panel-overview" class="" role="tabpanel">
+<div>
+  <div id="panel-overview" role="tabpanel">
     <Overview />
   </div>
   <div id="panel-projects" class="hidden" role="tabpanel">
