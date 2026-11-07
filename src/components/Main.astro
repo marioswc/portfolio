@@ -1,0 +1,17 @@
+---
+import Feed from "./layout/Feed.astro";
+import RightAside from "./layout/RightAside.astro";
+import LeftAside from "./layout/LeftAside.astro";
+import Footer from "./layout/Footer.astro";
+import Header from "./layout/Header.astro";
+---
+
+<div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[275px_1fr_350px] gap-6 px-0 md:px-2 items-start">
+  <LeftAside />
+  <main class="border-l border-r border-t border-line min-h-dvh">
+    <Header />
+    <Feed />
+  </main>
+  <RightAside />
+</div>
+<Footer />

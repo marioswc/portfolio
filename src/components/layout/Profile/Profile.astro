@@ -1,0 +1,27 @@
+---
+import Banner from "./Banner.astro";
+import ProfilePicture from "./ProfilePicture.astro";
+import Button from "../../ui/Button.astro";
+import { Icon } from "astro-icon/components";
+import ProfileInfo from "./Info.astro";
+---
+
+<Banner />
+<div class="relative">
+  <ProfilePicture load={"eager"} />
+  <div class="w-full px-2 flex items-center justify-end gap-2 mt-2">
+    <Button
+      href="#"
+      clazz="border border-line p-2 rounded-full bg-bg text-text hover:bg-primary-hover"
+    >
+      <Icon name="chat" class="size-5" />
+    </Button>
+    <Button
+      href="#"
+      clazz="font-semibold p-2 rounded-full bg-bg-secondary text-sm text-text-secondary hover:bg-secondary-hover"
+    >
+      Resume
+    </Button>
+  </div>
+</div>
+<ProfileInfo />

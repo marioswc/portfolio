@@ -1,0 +1,49 @@
+---
+import { Icon } from "astro-icon/components";
+import Button from "../../ui/Button.astro";
+
+const socialLinks = [
+  {
+    icon: "github",
+    name: "GitHub",
+    username: "@marioswc",
+    url: "https://github.com/marioswc",
+  },
+  {
+    icon: "linkedin",
+    name: "LinkedIn",
+    username: "linkedin/marioswc",
+    url: "https://www.linkedin.com/in/marioswc/",
+  },
+  {
+    icon: "mail",
+    name: "Email",
+    username: "mario.mendozac@icloud.com",
+    url: "mailto:mario.mendozac@icloud.com",
+  },
+];
+---
+
+<h3 class="text-xl font-extrabold text-text mb-1">Connect with me</h3>
+<div class="flex flex-col gap-4 items-start">
+    {
+        socialLinks.map((social) => (
+        <div class="w-full flex items-center justify-between">
+          <span class="flex items-center gap-2">
+            <Icon
+              name={social.icon}
+              class="size-10 p-1.5 border border-line text-text rounded-full shadow-xs"/>
+            <span class="flex flex-col items-start">
+              <span class="text-text text-lg font-extrabold font-geist tracking-tight">{social.name}</span>
+              <small class="text-muted text-xs leading-2">{social.username}</small>
+            </span>
+          </span>
+          <Button
+            href={social.url}
+            clazz="border border-line px-2 py-1 rounded-full text-sm hover:bg-primary-hover">
+            Open
+            </Button>
+        </div>
+        ))
+    }
+</div>

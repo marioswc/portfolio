@@ -1,0 +1,32 @@
+---
+const dataGit = [
+  {
+    label: "Last Push",
+    value: "portfolio",
+  },
+  {
+    label: "Total Repositories",
+    value: "10",
+  },
+  {
+    label: "Followers",
+    value: "10",
+  },
+  {
+    label: "Top Language",
+    value: "JavaScript",
+  },
+];
+---
+
+<h3 class="text-xl font-extrabold text-text mb-1">What's happening</h3>
+<div class="flex flex-col gap-4 items-start">
+    {
+        dataGit.map((data) => (
+            <div class="flex flex-col items-start">
+                <span class="text-muted text-sm leading-4">{data.label}</span>
+                <span class="text-text text-lg font-extrabold font-geist tracking-tight">{data.value}</span>
+            </div>
+        ))
+    }
+</div>

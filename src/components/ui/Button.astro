@@ -1,0 +1,15 @@
+---
+interface Prorps {
+  clazz?: string;
+  href: string;
+}
+const { href, clazz } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class=`flex justify-center border ${clazz} transition-all duration-300 ease-linear`>
+  <slot />
+</a>

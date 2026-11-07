@@ -1,0 +1,17 @@
+---
+import Banner from "../../../assets/images/banner.jpeg";
+import { Image } from "astro:assets";
+---
+
+<figure class="w-full h-30 overflow-hidden border-b border-line">
+  <Image
+    src={Banner}
+    alt="Banner de perfil"
+    class="object-cover w-full h-full"
+    width="693"
+    height="173"
+    draggable="false"
+    fetchpriority="high"
+    loading="eager"
+  />
+</figure>
