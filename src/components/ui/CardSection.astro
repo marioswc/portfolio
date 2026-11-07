@@ -1,0 +1,28 @@
+---
+import CardInfo from "../layout/cards/CardInfo.astro";
+import ProfilePicture from "../layout/profile/ProfilePicture.astro";
+import { Icon } from "astro-icon/components";
+interface Props {
+  year?: number;
+  pinned?: boolean;
+}
+const { year, pinned } = Astro.props as Props;
+---
+
+<div class="px-4 py-2 border-b border-line">
+  <div class=`px-6 mb-1 text-muted text-xs font-medium items-center gap-1 ${pinned ? "flex" : "hidden"}`>
+    <Icon name="pin" class="size-4" />
+    <span>Pinned</span>
+  </div>
+  <div class="flex items-start gap-2">
+    <div>
+      <ProfilePicture load="eager" clazz="w-12 border" />
+    </div>
+    <div>
+      <CardInfo year={year} />
+      <div class="text-sm font-medium text-text">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>

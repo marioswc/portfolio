@@ -1,0 +1,68 @@
+---
+// import all the components for the tabs
+import Overview from "../layout/sections/Overview.astro";
+import Projects from "../layout/sections/Projects.astro";
+import Journey from "../layout/sections/Journey.astro";
+
+const tabs = [
+  { id: "overview", label: "overview" },
+  { id: "projects", label: "projects" },
+  { id: "journey", label: "journey" },
+];
+---
+
+<!-- Tab Menu -->
+<div
+  role="tablist"
+  class="flex items-center md:justify-center justify-start mt-5 overflow-auto scrollbar-none border-b border-line"
+  id="tab-menu"
+>
+  {
+    tabs.map((tab, index) => (
+      <button
+        id={tab.id}
+        role="tab"
+        aria-controls={`panel-${tab.id}`}
+        aria-selected={index === 0 ? "true" : "false"}
+        class="capitalize cursor-pointer text-muted flex-1 border-b-2 border-transparent text-sm
+        p-2 hover:bg-primary-hover hover:text-text hover:border-line transition-colors duration-300 ease-in-out
+        aria-selected:bg-primary-hover aria-selected:text-text group aria-selected:border-b-2 aria-selected:border-line-selected"
+      >
+        {tab.label}
+      </button>
+    ))
+  }
+</div>
+<div class="">
+  <div id="panel-overview" class="" role="tabpanel">
+    <Overview />
+  </div>
+  <div id="panel-projects" class="hidden" role="tabpanel">
+    <Projects />
+  </div>
+  <div id="panel-journey" class="hidden" role="tabpanel">
+    <Journey />
+  </div>
+</div>
+
+<script>
+  const btns = document.querySelectorAll("#tab-menu button");
+  const panels = document.querySelectorAll("[role=tabpanel]");
+
+  btns.forEach((btnSelected) => {
+    btnSelected.addEventListener("click", () => {
+      // disable buttons except the selected one
+      btns.forEach((btn) => {
+        btn === btnSelected
+          ? btn.setAttribute("aria-selected", "true")
+          : btn.setAttribute("aria-selected", "false");
+      });
+      //show the selected tab panel and hide others
+      panels.forEach((panel) => {
+        panel.id === `panel-${btnSelected.id}`
+          ? panel.classList.remove("hidden")
+          : panel.classList.add("hidden");
+      });
+    });
+  });
+</script>
