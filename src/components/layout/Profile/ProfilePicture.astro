@@ -3,11 +3,12 @@ import { Image } from "astro:assets";
 import ppicture from "../../../assets/images/pp.jpeg";
 interface Props {
   load?: "lazy" | "eager" | undefined;
+  clazz?: string;
 }
-const { load } = Astro.props;
+const { load, clazz } = Astro.props;
 ---
 
-<figure class="absolute w-32 left-5 -top-18 rounded-full overflow-hidden border-2 border-line">
+<figure class=`${clazz} rounded-full overflow-hidden border-line`>
   <Image
     src={ppicture}
     alt="Foto de perfil"
