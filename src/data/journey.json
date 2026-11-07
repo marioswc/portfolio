@@ -1,0 +1,14 @@
+[
+    {
+        "year": 2026,
+        "title": "Currently looking for my first role",
+        "important": "developer",
+        "comment": "I've been building web applications with React, Node.js, and PostgreSQL"
+    },
+    {
+        "year": 2026,
+        "title": "Recently graduated from university",
+        "important": "Engineer in Computer Systems",
+        "comment": "I am eager to apply my skills in a professional setting :)"
+    }
+]

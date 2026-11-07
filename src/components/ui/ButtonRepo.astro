@@ -1,0 +1,54 @@
+---
+import { Icon } from "astro-icon/components";
+interface Props {
+  code_url?: string;
+  demo_url?: string;
+  item?: string;
+}
+const { code_url, demo_url, item } = Astro.props as Props;
+---
+
+<div class="flex items-center justify-around text-sm text-muted mt-2 max-w-md">
+  <button
+    aria-label="Show details"
+    id="show-details"
+    data-id=`${item}`
+    class="flex items-center gap-1.5 p-2 rounded-full cursor-pointer hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
+  >
+    <Icon name="info" class="size-4" />
+    Details
+  </button>
+  <a
+    href={code_url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
+  >
+    <Icon name="code" class="size-5" />
+    Code
+  </a>
+  <a
+    href={demo_url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
+  >
+    <Icon name="square-out" class="size-4" />
+    Demo
+  </a>
+</div>
+
+<script>
+  document.addEventListener("click", (event) => {
+    const target = event.target as HTMLElement;
+    const button = target.closest<HTMLButtonElement>("button[data-id]");
+
+    if (button && button.dataset.id) {
+      showDetails(button.dataset.id);
+    }
+  });
+
+  function showDetails(projectId: string) {
+    console.log("This is the project ID:", projectId);
+  }
+</script>

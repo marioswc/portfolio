@@ -1,0 +1,32 @@
+[
+    {
+        "id": "dailyquo",
+        "year": 2026,
+        "title": "DailyQuo",
+        "summary": "a daily quote web provided by an external API, built in React.",
+        "tags": ["React", "API", "JavaScript"],
+        "image": "https://raw.githubusercontent.com/marioswc/dailyquo/refs/heads/main/docs/img/preview.png",
+        "demo_url": "https://dailyquo.vercel.app/",
+        "code_url": "https://github.com/marioswc/dailyquo"
+    },
+    {
+        "id": "dsac",
+        "year": 2026,
+        "title": "DSAC System",
+        "summary": "a web system for managing appointments, clients, services and files within a tax/accounting office, developed in Laravel.",
+        "tags": ["PHP", "MySQL", "TailwindCSS", "AlpineJS"],
+        "image": "https://raw.githubusercontent.com/marioswc/dsac/main/docs/img/dsac.png",
+        "demo_url": "https://github.com/marioswc/dsac",
+        "code_url": "https://github.com/marioswc/dsac"
+    },
+    {
+        "id": "todo-list",
+        "year": 2026,
+        "title": "TaskFlow",
+        "summary": "a task management web application built with vanilla JavaScript.",
+        "tags": ["HTML", "Tailwind", "JavaScript", "Vite"],
+        "image": "https://raw.githubusercontent.com/marioswc/to-do-list/main/docs/img/preview-to-do-list.gif",
+        "demo_url": "https://to-do-list-ten-bay-47.vercel.app/",
+        "code_url": "https://github.com/marioswc/to-do-list"
+    }
+]
