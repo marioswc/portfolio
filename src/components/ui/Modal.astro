@@ -1,0 +1,128 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  id: string;
+  title?: string;
+  btnClass?: string;
+  dialClass?: string;
+  ariaLabel?: string;
+}
+const { id, title, btnClass = "", dialClass = "", ariaLabel } = Astro.props;
+---
+
+<style>
+  :global(body):has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  dialog {
+    opacity: 0;
+    transform: scale(0.95) translateY(8px);
+    transition:
+      opacity 0.2s ease-out,
+      transform 0.2s ease-out,
+      overlay 0.2s ease-out allow-discrete,
+      display 0.2s ease-out allow-discrete;
+  }
+
+  dialog[open] {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  @starting-style {
+    dialog[open] {
+      opacity: 0;
+      transform: scale(0.95) translateY(8px);
+    }
+  }
+
+  dialog::backdrop {
+    opacity: 0;
+    transition:
+      opacity 0.2s ease-out,
+      overlay 0.2s ease-out allow-discrete,
+      display 0.2s ease-out allow-discrete;
+  }
+
+  dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+</style>
+
+<dialog
+  closedby="any"
+  id={id}
+  aria-labelledby={title ? `${id}-title` : undefined}
+  class={`${dialClass} text-text w-[calc(100%-1.5rem)] m-auto rounded-xl bg-bg-modal backdrop:bg-black/25 backdrop:backdrop-blur-xs backdrop-blur-xl shadow-lg border border-line`}
+>
+  <div class="p-6">
+    <form method="dialog">
+      <div class="w-full flex items-center justify-between">
+        <div>
+          <h5
+            id={`${id}-title`}
+            class="text-text text-xl font-semibold capitalize"
+          >
+            {title}
+          </h5>
+        </div>
+        <button
+          class="text-sm font-medium cursor-pointer bg-none text-muted p-2 rounded-full hover:bg-primary-hover transition-colors duration-300 ease-linear"
+          aria-label="Close"
+        >
+          <Icon name="cross" class="size-5" />
+        </button>
+      </div>
+      <hr class="border border-line w-full px-2 my-2" />
+    </form>
+    <div class="text-center">
+      <slot name="content" />
+    </div>
+  </div>
+</dialog>
+
+<button
+  data-modal={id}
+  class={`${btnClass} cursor-pointer transition-colors duration-300 ease-linear`}
+  aria-label={ariaLabel}
+  aria-haspopup="dialog"
+  aria-controls={id}
+  type="button"
+>
+  <slot name="btnShowModal" />
+</button>
+
+<script>
+  const modalButtons =
+    document.querySelectorAll<HTMLButtonElement>("button[data-modal]");
+
+  modalButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalId = btn.dataset.modal;
+      if (!modalId) return;
+
+      const modal = document.getElementById(
+        modalId,
+      ) as HTMLDialogElement | null;
+      modal?.showModal();
+    });
+  });
+
+  const modals = document.querySelectorAll<HTMLDialogElement>("dialog");
+  modals.forEach((modal) => {
+    modal.addEventListener("click", (event) => {
+      const target = event.target as HTMLElement;
+      if (target.tagName === "DIALOG") {
+        modal.close();
+      }
+    });
+  });
+</script>

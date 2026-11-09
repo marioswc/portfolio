@@ -4,7 +4,15 @@
         "year": 2026,
         "title": "DailyQuo",
         "summary": "a daily quote web provided by an external API, built in React.",
+        "description": "A minimalist web application that delivers a single inspirational quote for each day of the year.",
         "tags": ["React", "API", "JavaScript"],
+        "features": [
+            "Day-of-Year Quote Mapping",
+            "Automatic Midnight Rollover",
+            "Zero-Refetch Local Caching",
+            "Debounced Clipboard Copy",
+            "Modular Hook Architecture"
+        ],
         "image": "https://raw.githubusercontent.com/marioswc/dailyquo/refs/heads/main/docs/img/preview.png",
         "demo_url": "https://dailyquo.vercel.app/",
         "code_url": "https://github.com/marioswc/dailyquo"
@@ -13,8 +21,16 @@
         "id": "dsac",
         "year": 2026,
         "title": "DSAC System",
-        "summary": "a web system for managing appointments, clients, services and files within a tax/accounting office, developed in Laravel.",
+        "summary": "a platform for managing clients, appointments, and files for a tax and accounting firm.",
+        "description": "Web system for managing appointments, clients, services, and files for a tax and accounting firm, built with Laravel.",
         "tags": ["PHP", "MySQL", "TailwindCSS", "AlpineJS"],
+        "features": [
+            "Public Landing & Booking",
+            "Client Tax & File Management",
+            "Multi-Status Appointment Flow",
+            "Dynamic Service Catalog",
+            "Role-Based Admin Portals"
+        ],
         "image": "https://raw.githubusercontent.com/marioswc/dsac/main/docs/img/dsac.png",
         "demo_url": "https://github.com/marioswc/dsac",
         "code_url": "https://github.com/marioswc/dsac"
@@ -24,7 +40,15 @@
         "year": 2026,
         "title": "TaskFlow",
         "summary": "a task management web application built with vanilla JavaScript.",
+        "description": "Fast, zero-dependency task manager built with modular vanilla JavaScript and Tailwind CSS. Created to demonstrate proficiency in modern web development practices.",
         "tags": ["HTML", "Tailwind", "JavaScript", "Vite"],
+        "features": [
+            "Seamless Task CRUD",
+            "Real-Time View Filtering",
+            "Persistent Browser Storage",
+            "Context-Aware Empty States",
+            "High-Contrast Dark UI"
+        ],
         "image": "https://raw.githubusercontent.com/marioswc/to-do-list/main/docs/img/preview-to-do-list.gif",
         "demo_url": "https://to-do-list-ten-bay-47.vercel.app/",
         "code_url": "https://github.com/marioswc/to-do-list"
