@@ -14,17 +14,17 @@ import { Icon } from "astro-icon/components";
     </div>
     <div class="mt-4 w-full flex flex-wrap items-center justify-start text-muted gap-x-4 gap-y-2">
         <div class="flex items-center gap-1.5">
-            <Icon name="location" class="size-4" />
+            <Icon name="location" class="size-4" aria-hidden="true" />
             <span class="text-sm">Mexico City</span>
         </div>
         <div class="flex items-center gap-1.5">
-            <Icon name="world" class="size-3.5" />
+            <Icon name="world" class="size-3.5" aria-hidden="true" />
             <span class="text-sm">ES | EN (B1)</span>
         </div>
         <div class="flex items-center gap-1.5 px-1">
-            <div class="flex relative size-2">
+            <div class="flex relative size-2" aria-hidden="true">
                 <span class="size-full bg-emerald-400 rounded-full"></span>
-                <span class="absolute size-full bg-emerald-700 opacity-75 rounded-full animate-ping"></span>
+                <span class="absolute size-full bg-emerald-700 opacity-75 rounded-full motion-safe:animate-ping"></span>
             </div>
             <span class="text-sm">Open to hire</span>
         </div>

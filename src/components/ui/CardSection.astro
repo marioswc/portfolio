@@ -12,7 +12,7 @@ const { year, pinned, load = "eager" } = Astro.props as Props;
 
 <div class="px-4 py-2 border-b border-line">
   <div class=`px-6 mb-1 text-muted text-xs font-medium items-center gap-1 ${pinned ? "flex" : "hidden"}`>
-    <Icon name="pin" class="size-4" />
+    <Icon name="pin" class="size-4" aria-hidden="true" />
     <span>Pinned</span>
   </div>
   <div class="flex items-start gap-2">

@@ -1,4 +1,5 @@
 ---
+import type { ImageMetadata } from "astro";
 import Modal from "./Modal.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
@@ -7,7 +8,7 @@ interface Props {
   demo_url?: string;
   id?: string;
   title?: string;
-  img?: string;
+  img?: ImageMetadata;
   desc?: string;
   features?: string[];
   stack?: string[];
@@ -28,13 +29,13 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
       <article class="text-left max-h-[75dvh] overflow-y-auto pr-1">
         {
           img && (
-            <figure class="border overflow-hidden rounded-lg shadow-sm border-line aspect-video max-h-48 sm:max-h-64 md:max-h-72 w-full bg-bg">
+            <figure class="border overflow-hidden rounded-lg shadow-sm border-line w-full bg-white">
               <Image
                 src={img}
                 alt={title ? `Preview of ${title}` : "Project preview"}
-                class="object-cover object-top w-full h-full"
-                width={600}
-                height={340}
+                widths={[600, 900, 1200]}
+                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 672px, 768px"
+                class="object-contain w-full h-auto max-h-64 sm:max-h-80 md:max-h-96 mx-auto block"
                 loading="lazy"
                 decoding="async"
                 fetchpriority="low"
@@ -53,7 +54,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
             aria-label={title ? `View live demo of ${title}` : "View live demo"}
             class="flex items-center gap-1 p-2 rounded-full bg-bg-secondary text-text-secondary hover:bg-secondary-hover transition-all duration-300 ease-linear"
           >
-            <Icon name="square-out" class="size-4" />
+            <Icon name="square-out" class="size-4" aria-hidden="true" />
             Demo
           </a>
           <a
@@ -63,7 +64,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
             aria-label={title ? `View source code for ${title}` : "View source code"}
             class="flex items-center gap-1 p-2 rounded-full bg-bg border border-line text-text hover:bg-primary-hover transition-all duration-300 ease-linear"
           >
-            <Icon name="code" class="size-4" />
+            <Icon name="code" class="size-4" aria-hidden="true" />
             Code
           </a>
         </div>
@@ -73,7 +74,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
             {
               features?.map((feat) => (
                 <li class="flex items-center gap-1">
-                  <Icon name="check" class="size-4 text-primary" />
+                  <Icon name="check" class="size-4 text-primary" aria-hidden="true" />
                   {feat}
                 </li>
               ))
@@ -92,7 +93,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
     </Fragment>
 
     <Fragment slot="btnShowModal">
-      <Icon name="info" class="size-4" />
+      <Icon name="info" class="size-4" aria-hidden="true" />
       <span class="text-sm">Details</span>
     </Fragment>
   </Modal>
@@ -104,7 +105,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
     aria-label={title ? `View source code for ${title}` : "View source code"}
     class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
   >
-    <Icon name="code" class="size-5" />
+    <Icon name="code" class="size-5" aria-hidden="true" />
     Code
   </a>
   <a
@@ -114,7 +115,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
     aria-label={title ? `View live demo of ${title}` : "View live demo"}
     class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
   >
-    <Icon name="square-out" class="size-4" />
+    <Icon name="square-out" class="size-4" aria-hidden="true" />
     Demo
   </a>
 </div>

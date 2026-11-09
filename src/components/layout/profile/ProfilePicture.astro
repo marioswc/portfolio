@@ -31,6 +31,7 @@ const {
     height={256}
     draggable="false"
     loading={load}
+    fetchpriority={load === "eager" ? "high" : "low"}
     decoding="async"
   />
 </figure>

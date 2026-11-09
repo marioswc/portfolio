@@ -13,7 +13,7 @@
             "Debounced Clipboard Copy",
             "Modular Hook Architecture"
         ],
-        "image": "https://raw.githubusercontent.com/marioswc/dailyquo/refs/heads/main/docs/img/preview.png",
+        "image": "preview-dailyquo.webp",
         "demo_url": "https://dailyquo.vercel.app/",
         "code_url": "https://github.com/marioswc/dailyquo"
     },
@@ -31,7 +31,7 @@
             "Dynamic Service Catalog",
             "Role-Based Admin Portals"
         ],
-        "image": "https://raw.githubusercontent.com/marioswc/dsac/main/docs/img/dsac.png",
+        "image": "preview-dsac.webp",
         "demo_url": "https://github.com/marioswc/dsac",
         "code_url": "https://github.com/marioswc/dsac"
     },
@@ -49,7 +49,7 @@
             "Context-Aware Empty States",
             "High-Contrast Dark UI"
         ],
-        "image": "https://raw.githubusercontent.com/marioswc/to-do-list/main/docs/img/preview-to-do-list.gif",
+        "image": "preview-to-do-list.webp",
         "demo_url": "https://to-do-list-ten-bay-47.vercel.app/",
         "code_url": "https://github.com/marioswc/to-do-list"
     }
