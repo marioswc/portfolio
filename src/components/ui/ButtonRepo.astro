@@ -33,8 +33,9 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
               <Image
                 src={img}
                 alt={title ? `Preview of ${title}` : "Project preview"}
-                widths={[600, 900, 1200]}
-                sizes="(max-width: 640px) 90vw, (max-width: 1024px) 672px, 768px"
+                width={896}
+                widths={[448, 896]}
+                sizes="(max-width: 640px) 100vw, 448px"
                 class="object-contain w-full h-auto max-h-64 sm:max-h-80 md:max-h-96 mx-auto block"
                 loading="lazy"
                 decoding="async"
@@ -44,7 +45,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
             </figure>
           )
         }
-        <h4 class="text-text text-lg font-semibold mt-3">{title}</h4>
+        <h3 class="text-text text-lg font-semibold mt-3">{title}</h3>
         <p class="text-muted text-sm">{desc}</p>
         <div class="flex items-center gap-4 my-2 text-sm">
           <a

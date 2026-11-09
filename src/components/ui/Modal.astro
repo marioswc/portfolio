@@ -55,6 +55,14 @@ const { id, title, btnClass = "", dialClass = "", ariaLabel } = Astro.props;
       opacity: 0;
     }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog,
+    dialog::backdrop {
+      transition: none;
+      transform: none;
+    }
+  }
 </style>
 
 <dialog
@@ -67,12 +75,12 @@ const { id, title, btnClass = "", dialClass = "", ariaLabel } = Astro.props;
     <form method="dialog">
       <div class="w-full flex items-center justify-between">
         <div>
-          <h3
+          <h2
             id={`${id}-title`}
             class="text-text text-xl font-semibold capitalize"
           >
             {title}
-          </h3>
+          </h2>
         </div>
         <button
           class="text-sm font-medium cursor-pointer bg-none text-muted p-2 rounded-full hover:bg-primary-hover transition-colors duration-300 ease-linear"

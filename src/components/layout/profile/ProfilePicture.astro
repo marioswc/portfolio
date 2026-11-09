@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import ppicture from "@assets/images/pp.jpeg";
 interface Props {
   load?: "lazy" | "eager" | undefined;
+  priority?: boolean;
   clazz?: string;
   alt?: string;
   widths?: number[];
@@ -10,6 +11,7 @@ interface Props {
 }
 const {
   load = "lazy",
+  priority = false,
   clazz,
   alt = "Profile",
   widths = [48, 96, 128, 256],
@@ -31,7 +33,7 @@ const {
     height={256}
     draggable="false"
     loading={load}
-    fetchpriority={load === "eager" ? "high" : "low"}
+    fetchpriority={priority ? "high" : load === "lazy" ? "low" : "auto"}
     decoding="async"
   />
 </figure>

@@ -25,6 +25,7 @@
 
 @layer base {
     :root {
+        color-scheme: light;
         --primary-hover: #ededed;
         --secondary-hover: #313131;
         --bg: #FAFAF9;
@@ -37,10 +38,11 @@
         --text: #111714;
         --text-secondary: #FAFAF9;
         --muted: #55605A;
-        --primary: #1999d0;
+        --primary: #1595d0;
     }
 
     .dark {
+        color-scheme: dark;
         --primary-hover: #313131;
         --secondary-hover: #ededed;
         --bg: #000000;
@@ -53,7 +55,7 @@
         --text: #FAFAF9;
         --text-secondary: #111714;
         --muted: #9CA6A0;
-        --primary: #1999d0;
+        --primary: #1595d0;
     }
 
     html, body {
@@ -66,6 +68,12 @@
         color: var(--text);
         font-family: var(--font-inter);
         transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        body {
+            transition: none;
+        }
     }
 
     h1, h2,h3, h4, h5, h6 {

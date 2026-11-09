@@ -13,7 +13,7 @@ const { year } = Astro.props as Props;
   </div>
   <div class="flex items-center gap-1 text-muted text-sm">
     <span>@marioswc</span>
-    <span>·</span>
-    <time>{year ?? "2026"}</time>
+    <span aria-hidden="true">·</span>
+    <time datetime={String(year ?? 2026)}>{year ?? "2026"}</time>
   </div>
 </div>

@@ -10,20 +10,24 @@ interface Props {
 const { year, pinned, load = "eager" } = Astro.props as Props;
 ---
 
-<div class="px-4 py-2 border-b border-line">
-  <div class=`px-6 mb-1 text-muted text-xs font-medium items-center gap-1 ${pinned ? "flex" : "hidden"}`>
-    <Icon name="pin" class="size-4" aria-hidden="true" />
-    <span>Pinned</span>
-  </div>
+<article class="px-4 py-2 border-b border-line">
+  {
+    pinned && (
+      <div class="px-6 mb-1 text-muted text-xs font-medium items-center gap-1 flex">
+        <Icon name="pin" class="size-4" aria-hidden="true" />
+        <span>Pinned</span>
+      </div>
+    )
+  }
   <div class="flex items-start gap-2">
     <div>
       <ProfilePicture load={load} alt="" clazz="w-12 border" />
     </div>
     <div>
       <CardInfo year={year} />
-      <article class="text-sm font-medium text-text">
+      <div class="text-sm font-medium text-text">
         <slot />
-      </article>
+      </div>
     </div>
   </div>
-</div>
+</article>
