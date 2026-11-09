@@ -7,7 +7,7 @@ import ButtonRepo from "@components/ui/ButtonRepo.astro";
 
 {
   Projects.map((item) => (
-    <CardSection pinned={false} year={item.year}>
+    <CardSection pinned={false} year={item.year} load="lazy">
       <p class="text-text text-sm">
         <strong class="font-semibold text-text">{item.title} </strong>—{" "}
         {item.summary}
@@ -21,13 +21,13 @@ import ButtonRepo from "@components/ui/ButtonRepo.astro";
           </li>
         ))}
       </ul>
-      <figure class="mt-2 border border-line shadow-xs max-w-md overflow-hidden rounded-lg">
+      <figure class="mt-2 border border-line shadow-xs max-w-md aspect-video overflow-hidden rounded-lg">
         <Image
           src={item.image}
-          alt={item.title}
+          alt={`Preview of ${item.title}`}
           class="object-cover w-full h-full"
-          width={400}
-          height={220}
+          width={448}
+          height={252}
           loading="lazy"
           decoding="async"
           draggable="false"

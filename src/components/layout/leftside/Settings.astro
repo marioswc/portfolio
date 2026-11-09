@@ -40,20 +40,20 @@ const isMobile = variant === "mobile";
           </button>
         </div>
         <span class="text-sm font-semibold">Theme</span>
-        <div class="flex items-center text-text">
+        <div role="group" aria-label="Theme" class="flex items-center text-text">
           <button
             type="button"
             data-theme-btn="light"
-            aria-selected="true"
-            class="text-muted px-4 py-2 border border-line rounded-l-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-selected:bg-bg-secondary aria-selected:text-text-secondary aria-selected:border-bg-secondary"
+            aria-pressed="true"
+            class="text-muted px-4 py-2 border border-line rounded-l-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-pressed:bg-bg-secondary aria-pressed:text-text-secondary aria-pressed:border-bg-secondary"
           >
             Light
           </button>
           <button
             type="button"
             data-theme-btn="dark"
-            aria-selected="false"
-            class="text-muted px-4 py-2 border-l-0 border border-line rounded-r-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-selected:bg-bg-secondary aria-selected:text-text-secondary aria-selected:border-bg-secondary"
+            aria-pressed="false"
+            class="text-muted px-4 py-2 border-l-0 border border-line rounded-r-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-pressed:bg-bg-secondary aria-pressed:text-text-secondary aria-pressed:border-bg-secondary"
           >
             Dark
           </button>
@@ -74,7 +74,7 @@ const isMobile = variant === "mobile";
   const syncThemeButtons = (theme: "light" | "dark") => {
     themeButtons.forEach((btn) => {
       const isSelected = btn.dataset.themeBtn === theme;
-      btn.setAttribute("aria-selected", String(isSelected));
+      btn.setAttribute("aria-pressed", String(isSelected));
     });
   };
 

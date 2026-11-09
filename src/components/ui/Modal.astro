@@ -67,12 +67,12 @@ const { id, title, btnClass = "", dialClass = "", ariaLabel } = Astro.props;
     <form method="dialog">
       <div class="w-full flex items-center justify-between">
         <div>
-          <h5
+          <h3
             id={`${id}-title`}
             class="text-text text-xl font-semibold capitalize"
           >
             {title}
-          </h5>
+          </h3>
         </div>
         <button
           class="text-sm font-medium cursor-pointer bg-none text-muted p-2 rounded-full hover:bg-primary-hover transition-colors duration-300 ease-linear"

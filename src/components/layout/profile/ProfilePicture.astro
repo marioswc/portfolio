@@ -4,18 +4,33 @@ import ppicture from "@assets/images/pp.jpeg";
 interface Props {
   load?: "lazy" | "eager" | undefined;
   clazz?: string;
+  alt?: string;
+  widths?: number[];
+  sizes?: string;
 }
-const { load, clazz } = Astro.props;
+const {
+  load = "lazy",
+  clazz,
+  alt = "Profile",
+  widths = [48, 96, 128, 256],
+  sizes = "48px",
+} = Astro.props;
 ---
 
-<figure class=`${clazz} rounded-full overflow-hidden border-line`>
+<figure
+  aria-hidden={alt === "" ? "true" : undefined}
+  class={`${clazz} aspect-square rounded-full overflow-hidden border-line`}
+>
   <Image
     src={ppicture}
-    alt="Foto de perfil"
-    class="w-full object-cover"
-    width="250"
-    height="250"
+    alt={alt}
+    widths={widths}
+    sizes={sizes}
+    class="w-full h-full object-cover"
+    width={256}
+    height={256}
     draggable="false"
     loading={load}
+    decoding="async"
   />
 </figure>

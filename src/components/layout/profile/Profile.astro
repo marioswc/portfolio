@@ -11,7 +11,8 @@ import ViewResume from "./ViewResume.astro";
 <div class="relative">
   <ProfilePicture
     load={"eager"}
-    clazz="absolute w-32 left-5 -top-18 border-2"/>
+    sizes="(max-width: 640px) 112px, 128px"
+    clazz="absolute w-28 sm:w-32 left-4 sm:left-5 -top-14 sm:-top-18 border-2"/>
   <div class="w-full px-2 flex items-center justify-end gap-2 mt-2">
     <Button
       href="https://www.linkedin.com/in/marioswc/"

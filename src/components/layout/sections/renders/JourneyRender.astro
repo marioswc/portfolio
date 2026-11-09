@@ -5,7 +5,7 @@ import CardSection from "@components/ui/CardSection.astro";
 
 {
   Journey.map((item) => (
-    <CardSection pinned={false} year={item.year}>
+    <CardSection pinned={false} year={item.year} load="lazy">
       <p>
         {item.title} as {item.important}, {item.comment}
       </p>

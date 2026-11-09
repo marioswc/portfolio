@@ -20,6 +20,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
   <Modal
     id=`project-${id}`
     title="Details"
+    ariaLabel={title ? `View details for ${title}` : "View project details"}
     dialClass="max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl"
     btnClass="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary"
   >
@@ -30,7 +31,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
             <figure class="border overflow-hidden rounded-lg shadow-sm border-line aspect-video max-h-48 sm:max-h-64 md:max-h-72 w-full bg-bg">
               <Image
                 src={img}
-                alt={title ?? "Project preview"}
+                alt={title ? `Preview of ${title}` : "Project preview"}
                 class="object-cover object-top w-full h-full"
                 width={600}
                 height={340}
@@ -49,6 +50,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
             href={demo_url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={title ? `View live demo of ${title}` : "View live demo"}
             class="flex items-center gap-1 p-2 rounded-full bg-bg-secondary text-text-secondary hover:bg-secondary-hover transition-all duration-300 ease-linear"
           >
             <Icon name="square-out" class="size-4" />
@@ -58,6 +60,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
             href={code_url}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={title ? `View source code for ${title}` : "View source code"}
             class="flex items-center gap-1 p-2 rounded-full bg-bg border border-line text-text hover:bg-primary-hover transition-all duration-300 ease-linear"
           >
             <Icon name="code" class="size-4" />
@@ -98,6 +101,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
     href={code_url}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={title ? `View source code for ${title}` : "View source code"}
     class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
   >
     <Icon name="code" class="size-5" />
@@ -107,6 +111,7 @@ const { code_url, demo_url, id, title, img, desc, stack, features } =
     href={demo_url}
     target="_blank"
     rel="noopener noreferrer"
+    aria-label={title ? `View live demo of ${title}` : "View live demo"}
     class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
   >
     <Icon name="square-out" class="size-4" />
