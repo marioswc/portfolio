@@ -43,13 +43,17 @@ const isMobile = variant === "mobile";
         <div class="flex items-center text-text">
           <button
             type="button"
-            class="px-4 py-2 border rounded-l-full cursor-pointer bg-bg-secondary text-text-secondary"
+            data-theme-btn="light"
+            aria-selected="true"
+            class="text-muted px-4 py-2 border border-line rounded-l-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-selected:bg-bg-secondary aria-selected:text-text-secondary aria-selected:border-bg-secondary"
           >
             Light
           </button>
           <button
             type="button"
-            class="text-muted px-4 py-2 border-l-0 border border-line rounded-r-full cursor-pointer"
+            data-theme-btn="dark"
+            aria-selected="false"
+            class="text-muted px-4 py-2 border-l-0 border border-line rounded-r-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-selected:bg-bg-secondary aria-selected:text-text-secondary aria-selected:border-bg-secondary"
           >
             Dark
           </button>
@@ -63,3 +67,28 @@ const isMobile = variant === "mobile";
     {!isMobile && <span>Open Settings</span>}
   </Fragment>
 </Modal>
+
+<script>
+  const themeButtons = document.querySelectorAll<HTMLButtonElement>("[data-theme-btn]");
+
+  const syncThemeButtons = (theme: "light" | "dark") => {
+    themeButtons.forEach((btn) => {
+      const isSelected = btn.dataset.themeBtn === theme;
+      btn.setAttribute("aria-selected", String(isSelected));
+    });
+  };
+
+  const currentTheme = document.documentElement.classList.contains("dark")
+    ? "dark"
+    : "light";
+  syncThemeButtons(currentTheme);
+
+  themeButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const selectedTheme = btn.dataset.themeBtn === "dark" ? "dark" : "light";
+      document.documentElement.classList.toggle("dark", selectedTheme === "dark");
+      localStorage.setItem("theme", selectedTheme);
+      syncThemeButtons(selectedTheme);
+    });
+  });
+</script>

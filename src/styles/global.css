@@ -2,6 +2,8 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/geist";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
     --font-geist: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
@@ -35,6 +37,22 @@
         --text: #111714;
         --text-secondary: #FAFAF9;
         --muted: #55605A;
+        --primary: #1999d0;
+    }
+
+    .dark {
+        --primary-hover: #313131;
+        --secondary-hover: #ededed;
+        --bg: #000000;
+        --bg-header: rgba(10, 13, 11, 0.796);
+        --bg-modal: rgba(10, 13, 11, 0.945);
+        --bg-secondary: #FAFAF9;
+        --tile: #141A16;
+        --line: #222924;
+        --line-selected: #FAFAF9;
+        --text: #FAFAF9;
+        --text-secondary: #111714;
+        --muted: #9CA6A0;
         --primary: #1999d0;
     }
 
