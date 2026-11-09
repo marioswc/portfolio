@@ -1,0 +1,14 @@
+---
+import Logo from "@assets/logo.svg";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line p-2 text-[13px] text-muted">
+  <div class="flex flex-col items-center gap-2.5">
+    <figure class="flex items-center gap-2">
+      <Logo class="size-4" />
+      <small class="font-semibold text-text">Mario Mendoza</small>
+    </figure>
+    <small>&copy; {year} All rights reserved</small>
+  </div>
+</footer>

@@ -1,0 +1,21 @@
+---
+import { Image } from "astro:assets";
+import ppicture from "@assets/images/pp.jpeg";
+interface Props {
+  load?: "lazy" | "eager" | undefined;
+  clazz?: string;
+}
+const { load, clazz } = Astro.props;
+---
+
+<figure class=`${clazz} rounded-full overflow-hidden border-line`>
+  <Image
+    src={ppicture}
+    alt="Foto de perfil"
+    class="w-full object-cover"
+    width="250"
+    height="250"
+    draggable="false"
+    loading={load}
+  />
+</figure>

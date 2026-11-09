@@ -1,0 +1,115 @@
+---
+import Modal from "./Modal.astro";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+interface Props {
+  code_url?: string;
+  demo_url?: string;
+  id?: string;
+  title?: string;
+  img?: string;
+  desc?: string;
+  features?: string[];
+  stack?: string[];
+}
+const { code_url, demo_url, id, title, img, desc, stack, features } =
+  Astro.props as Props;
+---
+
+<div class="flex items-center justify-around text-sm text-muted mt-2 max-w-md">
+  <Modal
+    id=`project-${id}`
+    title="Details"
+    dialClass="max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl"
+    btnClass="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary"
+  >
+    <Fragment slot="content">
+      <article class="text-left max-h-[75dvh] overflow-y-auto pr-1">
+        {
+          img && (
+            <figure class="border overflow-hidden rounded-lg shadow-sm border-line aspect-video max-h-48 sm:max-h-64 md:max-h-72 w-full bg-bg">
+              <Image
+                src={img}
+                alt={title ?? "Project preview"}
+                class="object-cover object-top w-full h-full"
+                width={600}
+                height={340}
+                loading="lazy"
+                decoding="async"
+                fetchpriority="low"
+                draggable="false"
+              />
+            </figure>
+          )
+        }
+        <h4 class="text-text text-lg font-semibold mt-3">{title}</h4>
+        <p class="text-muted text-sm">{desc}</p>
+        <div class="flex items-center gap-4 my-2 text-sm">
+          <a
+            href={demo_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1 p-2 rounded-full bg-bg-secondary text-text-secondary hover:bg-secondary-hover transition-all duration-300 ease-linear"
+          >
+            <Icon name="square-out" class="size-4" />
+            Demo
+          </a>
+          <a
+            href={code_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-1 p-2 rounded-full bg-bg border border-line text-text hover:bg-primary-hover transition-all duration-300 ease-linear"
+          >
+            <Icon name="code" class="size-4" />
+            Code
+          </a>
+        </div>
+        <div class="mt-2">
+          <p class="text-text font-semibold">Features</p>
+          <ul class="text-muted mt-1">
+            {
+              features?.map((feat) => (
+                <li class="flex items-center gap-1">
+                  <Icon name="check" class="size-4 text-primary" />
+                  {feat}
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-2 text-text font-semibold">Stack</p>
+          <ul class="flex flex-wrap gap-2 items-start text-sm text-muted mt-1">
+            {
+              stack?.map((tag) => (
+                <li class="border border-line px-2 rounded-md">{tag}</li>
+              ))
+            }
+          </ul>
+        </div>
+      </article>
+    </Fragment>
+
+    <Fragment slot="btnShowModal">
+      <Icon name="info" class="size-4" />
+      <span class="text-sm">Details</span>
+    </Fragment>
+  </Modal>
+
+  <a
+    href={code_url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
+  >
+    <Icon name="code" class="size-5" />
+    Code
+  </a>
+  <a
+    href={demo_url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex items-center gap-1.5 p-2 rounded-full hover:bg-primary-hover hover:text-primary transition-all duration-300 ease-linear"
+  >
+    <Icon name="square-out" class="size-4" />
+    Demo
+  </a>
+</div>

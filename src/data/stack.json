@@ -1,0 +1,18 @@
+[
+    {
+        "category": "Frontend",
+        "skills": ["HTML", "CSS","JavaScript", "Tailwind CSS"]
+    },
+    {
+        "category": "Backend",
+        "skills": ["PHP", "Python", "Node.js"]
+    },
+    {
+        "category": "Database",
+        "skills": ["MySQL", "PostgreSQL"]
+    },
+    {
+        "category": "Tool",
+        "skills": ["Git", "GitHub", "Docker"]
+    }
+]

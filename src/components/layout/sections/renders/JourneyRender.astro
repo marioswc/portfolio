@@ -1,0 +1,14 @@
+---
+import Journey from "@data/journey.json";
+import CardSection from "@components/ui/CardSection.astro";
+---
+
+{
+  Journey.map((item) => (
+    <CardSection pinned={false} year={item.year}>
+      <p>
+        {item.title} as {item.important}, {item.comment}
+      </p>
+    </CardSection>
+  ))
+}
