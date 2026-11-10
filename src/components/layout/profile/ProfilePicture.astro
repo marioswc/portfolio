@@ -1,6 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import ppicture from "@assets/images/pp.jpeg";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+
 interface Props {
   load?: "lazy" | "eager" | undefined;
   priority?: boolean;
@@ -13,7 +17,7 @@ const {
   load = "lazy",
   priority = false,
   clazz,
-  alt = "Profile",
+  alt = t("profile.pictureAlt"),
   widths = [48, 96, 128, 256],
   sizes = "48px",
 } = Astro.props;

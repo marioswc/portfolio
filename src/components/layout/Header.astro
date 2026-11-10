@@ -1,6 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import Settings from "@components/layout/leftside/Settings.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <header class="py-1 px-2 sticky top-0 z-50 backdrop-blur-2xl shadow-xl bg-bg-header">
@@ -12,7 +15,7 @@ import Settings from "@components/layout/leftside/Settings.astro";
           <span>Mario Mendoza</span>
           <Icon name="verified" class="size-5" aria-hidden="true" />
         </span>
-        <small class="text-muted text-sm">Software Developer</small>
+        <small class="text-muted text-sm">{t("header.role")}</small>
       </h1>
     </div>
     <!-- mobile menu -->

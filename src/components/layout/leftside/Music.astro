@@ -1,11 +1,17 @@
-<h2 class="text-xl font-extrabold text-text mb-1">Recently played</h2>
+---
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<h2 class="text-xl font-extrabold text-text mb-1">{t("music.title")}</h2>
 <div class="flex items-center justify-start gap-2">
     <figure class="flex size-16 rounded-lg overflow-hidden shadow-sm">
         <span class="size-full bg-green-500"></span>
     </figure>
     <div class="flex flex-col items-start ml-2">
-        <span class="text-text text-lg font-extrabold font-geist tracking-tight">Song Title</span>
-        <small class="text-muted text-xs leading-4">Artist Name</small>
-        <small class="text-muted text-xs">1 day ago</small>
+        <span class="text-text text-lg font-extrabold font-geist tracking-tight">{t("music.songTitle")}</span>
+        <small class="text-muted text-xs leading-4">{t("music.artistName")}</small>
+        <small class="text-muted text-xs">{t("music.timeAgo")}</small>
     </div>
 </div>

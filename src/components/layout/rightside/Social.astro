@@ -1,6 +1,9 @@
 ---
 import { Icon } from "astro-icon/components";
 import Button from "../../ui/Button.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 
 const socialLinks = [
   {
@@ -17,14 +20,14 @@ const socialLinks = [
   },
   {
     icon: "mail",
-    name: "Email",
+    name: t("social.email"),
     username: "mario.mendozac@icloud.com",
     url: "mailto:mario.mendozac@icloud.com",
   },
 ];
 ---
 
-<h2 class="text-xl font-extrabold text-text mb-1">Connect with me</h2>
+<h2 class="text-xl font-extrabold text-text mb-1">{t("social.title")}</h2>
 <div class="flex flex-col gap-4 items-start">
     {
         socialLinks.map((social) => (
@@ -41,9 +44,9 @@ const socialLinks = [
           </div>
           <Button
             href={social.url}
-            ariaLabel={`Open ${social.name}`}
+            ariaLabel={`${t("social.open")} ${social.name}`}
             clazz="border border-line px-2 py-1 rounded-full text-sm hover:bg-primary-hover">
-            Open
+            {t("social.open")}
           </Button>
         </div>
         ))

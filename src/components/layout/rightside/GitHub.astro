@@ -1,25 +1,29 @@
 ---
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+
 const dataGit = [
   {
-    label: "Last Push",
+    label: t("github.lastPush"),
     value: "portfolio",
   },
   {
-    label: "Total Repositories",
+    label: t("github.totalRepos"),
     value: "10",
   },
   {
-    label: "Followers",
+    label: t("github.followers"),
     value: "10",
   },
   {
-    label: "Top Language",
+    label: t("github.topLanguage"),
     value: "JavaScript",
   },
 ];
 ---
 
-<h2 class="text-xl font-extrabold text-text mb-1">What's happening</h2>
+<h2 class="text-xl font-extrabold text-text mb-1">{t("github.title")}</h2>
 <div class="flex flex-col gap-4 items-start">
     {
         dataGit.map((data) => (

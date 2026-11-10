@@ -2,12 +2,15 @@
 import CardInfo from "../layout/cards/CardInfo.astro";
 import ProfilePicture from "../layout/profile/ProfilePicture.astro";
 import { Icon } from "astro-icon/components";
+import { useTranslations } from "@i18n/utils";
+
 interface Props {
   year?: number;
   pinned?: boolean;
   load?: "lazy" | "eager";
 }
 const { year, pinned, load = "eager" } = Astro.props as Props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <article class="px-4 py-2 border-b border-line">
@@ -15,7 +18,7 @@ const { year, pinned, load = "eager" } = Astro.props as Props;
     pinned && (
       <div class="px-6 mb-1 text-muted text-xs font-medium items-center gap-1 flex">
         <Icon name="pin" class="size-4" aria-hidden="true" />
-        <span>Pinned</span>
+        <span>{t("card.pinned")}</span>
       </div>
     )
   }

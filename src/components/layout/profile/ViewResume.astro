@@ -2,11 +2,15 @@
 import Modal from "@components/ui/Modal.astro";
 import { Image } from "astro:assets";
 import resumePreview from "@assets/images/resume-preview.png";
+import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Modal
   id="resume"
-  title="My resume"
+  title={t("resume.title")}
   dialClass="max-w-md sm:max-w-xl md:max-w-2xl lg:max-w-3xl"
   btnClass="font-semibold p-2 rounded-full bg-bg-secondary text-sm text-text-secondary hover:bg-secondary-hover">
   <Fragment slot="content">
@@ -14,7 +18,7 @@ import resumePreview from "@assets/images/resume-preview.png";
       class="max-h-[60dvh] sm:max-h-[65dvh] lg:max-h-[72dvh] overflow-y-auto rounded-lg border border-line">
       <Image
         src={resumePreview}
-        alt="Mario Mendoza Resume"
+        alt={t("resume.alt")}
         width={1200}
         widths={[600, 900, 1200]}
         sizes="(max-width: 640px) 90vw, (max-width: 1024px) 672px, 768px"
@@ -27,15 +31,16 @@ import resumePreview from "@assets/images/resume-preview.png";
     </div>
     <div class="flex justify-end">
       <a
-        class="px-4 py-2 mt-2 text-sm text-text-secondary font-medium bg-bg-secondary rounded-full hover:bg-secondary-hover transition-colors duration-300 ease-linear"
+        class="flex items-center gap-1 px-4 py-2 mt-2 text-sm text-text-secondary font-medium bg-bg-secondary rounded-full hover:bg-secondary-hover transition-colors duration-300 ease-linear"
         href="/resumeMarioMendoza.pdf"
         download="resumeMarioMendoza.pdf"
-      >
-        Download Resume
+>
+      {t("resume.download")}
+      <Icon name="download" class="size-5" aria-hidden="true" />
       </a>
     </div>
   </Fragment>
   <Fragment slot="btnShowModal">
-    <span>Resume</span>
+    <span>{t("resume.button")}</span>
   </Fragment>
 </Modal>

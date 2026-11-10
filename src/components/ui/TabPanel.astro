@@ -3,18 +3,21 @@
 import Overview from "@components/layout/sections/Overview.astro";
 import Projects from "@components/layout/sections/Projects.astro";
 import Journey from "@components/layout/sections/Journey.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 
 const tabs = [
-  { id: "overview", label: "overview" },
-  { id: "projects", label: "projects" },
-  { id: "journey", label: "journey" },
+  { id: "overview", label: t("tabs.overview") },
+  { id: "projects", label: t("tabs.projects") },
+  { id: "journey", label: t("tabs.journey") },
 ];
 ---
 
 <!-- Tab Menu -->
 <div
   role="tablist"
-  aria-label="Profile sections"
+  aria-label={t("tabs.ariaLabel")}
   class="flex items-center md:justify-center justify-start mt-5 overflow-auto scrollbar-none border-b border-line"
   id="tab-menu"
 >

@@ -3,16 +3,31 @@
         "id": "dailyquo",
         "year": 2026,
         "title": "DailyQuo",
-        "summary": "a daily quote web provided by an external API, built in React.",
-        "description": "A minimalist web application that delivers a single inspirational quote for each day of the year.",
+        "summary": {
+            "en": "a daily quote web provided by an external API, built in React.",
+            "es": "una web de frases diarias provista por una API externa, construida en React."
+        },
+        "description": {
+            "en": "A minimalist web application that delivers a single inspirational quote for each day of the year.",
+            "es": "Una aplicación web minimalista que entrega una frase inspiradora para cada día del año."
+        },
         "tags": ["React", "API", "JavaScript"],
-        "features": [
-            "Day-of-Year Quote Mapping",
-            "Automatic Midnight Rollover",
-            "Zero-Refetch Local Caching",
-            "Debounced Clipboard Copy",
-            "Modular Hook Architecture"
-        ],
+        "features": {
+            "en": [
+                "Day-of-Year Quote Mapping",
+                "Automatic Midnight Rollover",
+                "Local Storage Without Unnecessary Reloads",
+                "Debounced Clipboard Copy",
+                "Modular Hook Architecture"
+            ],
+            "es": [
+                "Asignación de frase por día del año",
+                "Cambio automático a medianoche",
+                "Almacenamiento local sin recargas innecesarias",
+                "Copiado al portapapeles con debounce",
+                "Arquitectura modular de Hooks"
+            ]
+        },
         "image": "preview-dailyquo.webp",
         "demo_url": "https://dailyquo.vercel.app/",
         "code_url": "https://github.com/marioswc/dailyquo"
@@ -21,16 +36,31 @@
         "id": "dsac",
         "year": 2026,
         "title": "DSAC System",
-        "summary": "a platform for managing clients, appointments, and files for a tax and accounting firm.",
-        "description": "Web system for managing appointments, clients, services, and files for a tax and accounting firm, built with Laravel.",
+        "summary": {
+            "en": "a platform for managing clients, appointments, and files for a tax and accounting firm.",
+            "es": "una plataforma para gestionar clientes, citas y archivos de un despacho contable y fiscal."
+        },
+        "description": {
+            "en": "Web system for managing appointments, clients, services, and files for a tax and accounting firm, built with Laravel.",
+            "es": "Sistema web para la gestión de citas, clientes, servicios y archivos de un despacho contable y fiscal, desarrollado con Laravel."
+        },
         "tags": ["PHP", "MySQL", "TailwindCSS", "AlpineJS"],
-        "features": [
-            "Public Landing & Booking",
-            "Client Tax & File Management",
-            "Multi-Status Appointment Flow",
-            "Dynamic Service Catalog",
-            "Role-Based Admin Portals"
-        ],
+        "features": {
+            "en": [
+                "Public Landing",
+                "Client Tax & File Management",
+                "Multi-Status Appointment Flow",
+                "Dynamic Service Catalog",
+                "Role-Based Admin Portals"
+            ],
+            "es": [
+                "Landing pública",
+                "Gestión fiscal y de archivos de clientes",
+                "Flujo de citas con múltiples estados",
+                "Catálogo dinámico de servicios",
+                "Portales administrativos basados en roles"
+            ]
+        },
         "image": "preview-dsac.webp",
         "demo_url": "https://github.com/marioswc/dsac",
         "code_url": "https://github.com/marioswc/dsac"
@@ -39,16 +69,27 @@
         "id": "todo-list",
         "year": 2026,
         "title": "TaskFlow",
-        "summary": "a task management web application built with vanilla JavaScript.",
-        "description": "Fast, zero-dependency task manager built with modular vanilla JavaScript and Tailwind CSS. Created to demonstrate proficiency in modern web development practices.",
+        "summary": {
+            "en": "a task management web application built with vanilla JavaScript.",
+            "es": "una aplicación web de gestión de tareas construida con JavaScript vanilla."
+        },
+        "description": {
+            "en": "Fast, zero-dependency task manager built with modular vanilla JavaScript and Tailwind CSS. Created to demonstrate proficiency in modern web development practices.",
+            "es": "Gestor de tareas rápido y sin dependencias construido con JavaScript vanilla modular y Tailwind CSS. Creado para demostrar dominio de buenas prácticas en desarrollo web moderno."
+        },
         "tags": ["HTML", "Tailwind", "JavaScript", "Vite"],
-        "features": [
-            "Seamless Task CRUD",
-            "Real-Time View Filtering",
-            "Persistent Browser Storage",
-            "Context-Aware Empty States",
-            "High-Contrast Dark UI"
-        ],
+        "features": {
+            "en": [
+                "Seamless Task CRUD",
+                "Persistent Browser Storage",
+                "Context-Aware Empty States"
+            ],
+            "es": [
+                "CRUD fluido de tareas",
+                "Almacenamiento persistente en navegador",
+                "Estados vacíos contextuales"
+            ]
+        },
         "image": "preview-to-do-list.webp",
         "demo_url": "https://to-do-list-ten-bay-47.vercel.app/",
         "code_url": "https://github.com/marioswc/to-do-list"

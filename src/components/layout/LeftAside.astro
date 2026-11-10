@@ -2,9 +2,12 @@
 import CardAside from "../ui/CardAside.astro";
 import Music from "./leftside/Music.astro";
 import Settings from "./leftside/Settings.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<aside aria-label="Recently played and settings" class="sticky top-0 p-2 hidden lg:flex flex-col gap-2 items-start w-full">
+<aside aria-label={t("aside.leftAria")} class="sticky top-0 p-2 hidden lg:flex flex-col gap-2 items-start w-full">
     <CardAside>
         <Music />
     </CardAside>

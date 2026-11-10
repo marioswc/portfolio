@@ -1,12 +1,15 @@
 ---
 import Banner from "@assets/images/banner.jpeg";
 import { Image } from "astro:assets";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <figure class="w-full h-30 overflow-hidden border-b border-line">
   <Image
     src={Banner}
-    alt="Profile banner"
+    alt={t("profile.bannerAlt")}
     widths={[480, 693, 1386]}
     sizes="(max-width: 768px) 100vw, 693px"
     class="object-cover w-full h-full"

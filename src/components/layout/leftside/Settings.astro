@@ -1,6 +1,8 @@
 ---
 import Modal from "@components/ui/Modal.astro";
 import { Icon } from "astro-icon/components";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLang, useTranslations } from "@i18n/utils";
 
 interface Props {
   variant?: "desktop" | "mobile";
@@ -8,13 +10,15 @@ interface Props {
 
 const { variant = "desktop" } = Astro.props;
 const isMobile = variant === "mobile";
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Modal
   id={isMobile ? "mobile-settings" : "settings"}
-  title="Appearance"
+  title={t("settings.title")}
   dialClass="max-w-md"
-  ariaLabel={isMobile ? "Open settings" : undefined}
+  ariaLabel={isMobile ? t("settings.open") : undefined}
   btnClass={
     isMobile
       ? "lg:hidden block p-2 rounded-full bg-bg-secondary text-text-secondary hover:bg-secondary-hover"
@@ -24,32 +28,44 @@ const isMobile = variant === "mobile";
   <Fragment slot="content">
     <div class="p-4">
       <div class="flex flex-col gap-2 items-start text-text">
-        <span class="text-sm font-semibold">Language</span>
-        <div role="group" aria-label="Language" class="flex items-center text-text">
-          <button
-            type="button"
-            aria-pressed="false"
-            class="text-muted px-4 py-2 rounded-l-full cursor-pointer border-r-0 border border-line"
+        <span class="text-sm font-semibold">{t("settings.language")}</span>
+        <div role="group" aria-label={t("settings.language")} class="flex items-center text-text">
+          <a
+            href={getRelativeLocaleUrl("es", "")}
+            data-lang-link="es"
+            aria-current={lang === "es" ? "page" : undefined}
+            class:list={[
+              "px-4 py-2 border rounded-l-full cursor-pointer transition-colors duration-300 ease-linear",
+              lang === "es"
+                ? "bg-bg-secondary text-text-secondary border-bg-secondary"
+                : "border-line text-muted hover:bg-primary-hover hover:text-text",
+            ]}
           >
-            Spanish
-          </button>
-          <button
-            type="button"
-            aria-pressed="true"
-            class="px-4 py-2 rounded-r-full cursor-pointer bg-bg-secondary text-text-secondary"
+            {t("settings.lang.es")}
+          </a>
+          <a
+            href={getRelativeLocaleUrl("en", "")}
+            data-lang-link="en"
+            aria-current={lang === "en" ? "page" : undefined}
+            class:list={[
+              "px-4 py-2 border-l-0 border rounded-r-full cursor-pointer transition-colors duration-300 ease-linear",
+              lang === "en"
+                ? "bg-bg-secondary text-text-secondary border-bg-secondary"
+                : "border-line text-muted hover:bg-primary-hover hover:text-text",
+            ]}
           >
-            English
-          </button>
+            {t("settings.lang.en")}
+          </a>
         </div>
-        <span class="text-sm font-semibold">Theme</span>
-        <div role="group" aria-label="Theme" class="flex items-center text-text">
+        <span class="text-sm font-semibold">{t("settings.theme")}</span>
+        <div role="group" aria-label={t("settings.theme")} class="flex items-center text-text">
           <button
             type="button"
             data-theme-btn="light"
             aria-pressed="true"
             class="text-muted px-4 py-2 border border-line rounded-l-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-pressed:bg-bg-secondary aria-pressed:text-text-secondary aria-pressed:border-bg-secondary"
           >
-            Light
+            {t("settings.theme.light")}
           </button>
           <button
             type="button"
@@ -57,7 +73,7 @@ const isMobile = variant === "mobile";
             aria-pressed="false"
             class="text-muted px-4 py-2 border-l-0 border border-line rounded-r-full cursor-pointer hover:bg-primary-hover hover:text-text transition-colors duration-300 ease-linear aria-pressed:bg-bg-secondary aria-pressed:text-text-secondary aria-pressed:border-bg-secondary"
           >
-            Dark
+            {t("settings.theme.dark")}
           </button>
         </div>
       </div>
@@ -66,12 +82,16 @@ const isMobile = variant === "mobile";
 
   <Fragment slot="btnShowModal">
     <Icon name="settings" class={isMobile ? "size-5" : "size-4"} aria-hidden="true" />
-    {!isMobile && <span>Open Settings</span>}
+    {!isMobile && <span>{t("settings.open")}</span>}
   </Fragment>
 </Modal>
 
 <script>
   const themeButtons = document.querySelectorAll<HTMLButtonElement>("[data-theme-btn]");
+  const langLinks = document.querySelectorAll<HTMLAnchorElement>("[data-lang-link]");
+
+  const getActiveTheme = (): "light" | "dark" =>
+    document.documentElement.classList.contains("dark") ? "dark" : "light";
 
   const syncThemeButtons = (theme: "light" | "dark") => {
     themeButtons.forEach((btn) => {
@@ -80,17 +100,42 @@ const isMobile = variant === "mobile";
     });
   };
 
-  const currentTheme = document.documentElement.classList.contains("dark")
-    ? "dark"
-    : "light";
-  syncThemeButtons(currentTheme);
+  syncThemeButtons(getActiveTheme());
 
   themeButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const selectedTheme = btn.dataset.themeBtn === "dark" ? "dark" : "light";
       document.documentElement.classList.toggle("dark", selectedTheme === "dark");
-      localStorage.setItem("theme", selectedTheme);
+      try {
+        localStorage.setItem("theme", selectedTheme);
+      } catch {}
       syncThemeButtons(selectedTheme);
     });
+  });
+
+  langLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const dialog = link.closest("dialog");
+      if (link.getAttribute("aria-current") === "page") {
+        event.preventDefault();
+        dialog?.close();
+        return;
+      }
+      dialog?.close();
+    });
+  });
+
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) {
+      syncThemeButtons(getActiveTheme());
+      document.querySelectorAll<HTMLDialogElement>("dialog[open]").forEach((d) => d.close());
+    }
+  });
+
+  window.addEventListener("storage", (event) => {
+    if (event.key === "theme" && (event.newValue === "dark" || event.newValue === "light")) {
+      document.documentElement.classList.toggle("dark", event.newValue === "dark");
+      syncThemeButtons(event.newValue);
+    }
   });
 </script>

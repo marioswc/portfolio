@@ -1,18 +1,30 @@
 [
     {
-        "category": "Frontend",
-        "skills": ["HTML", "CSS","JavaScript", "Tailwind CSS"]
+        "category": {
+            "en": "Frontend",
+            "es": "Frontend"
+        },
+        "skills": ["HTML", "CSS", "JavaScript", "Tailwind CSS"]
     },
     {
-        "category": "Backend",
+        "category": {
+            "en": "Backend",
+            "es": "Backend"
+        },
         "skills": ["PHP", "Python", "Node.js"]
     },
     {
-        "category": "Database",
+        "category": {
+            "en": "Database",
+            "es": "Bases de datos"
+        },
         "skills": ["MySQL", "PostgreSQL"]
     },
     {
-        "category": "Tool",
+        "category": {
+            "en": "Tool",
+            "es": "Herramientas"
+        },
         "skills": ["Git", "GitHub", "Docker"]
     }
 ]

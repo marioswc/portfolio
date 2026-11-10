@@ -2,9 +2,12 @@
 import CardAside from "../ui/CardAside.astro";
 import GitHub from "./rightside/GitHub.astro";
 import Social from "./rightside/Social.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
-<aside aria-label="GitHub activity and social links" class="sticky top-0 p-2 hidden lg:flex flex-col gap-2 items-start w-full">
+<aside aria-label={t("aside.rightAria")} class="sticky top-0 p-2 hidden lg:flex flex-col gap-2 items-start w-full">
     <CardAside>
         <GitHub />
     </CardAside>
@@ -12,6 +15,6 @@ import Social from "./rightside/Social.astro";
         <Social />
     </CardAside>
     <div class="w-full flex justify-center">
-        <small class="text-xs">Built with more coffee than love ❤️</small>
+        <small class="text-xs">{t("aside.builtWith")}</small>
     </div>
 </aside>

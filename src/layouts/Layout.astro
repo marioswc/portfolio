@@ -1,22 +1,39 @@
 ---
 import "../styles/global.css";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLang, useTranslations } from "@i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(Astro.currentLocale);
 ---
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="alternate" hreflang="en" href={getRelativeLocaleUrl("en", "")} />
+		<link rel="alternate" hreflang="es" href={getRelativeLocaleUrl("es", "")} />
+		<link rel="alternate" hreflang="x-default" href={getRelativeLocaleUrl("en", "")} />
 		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content="Personal portfolio of Mario Mendoza, Full-Stack Software Developer." />
-		<title>Portfolio - Mario Mendoza</title>
+		<meta name="description" content={t("site.description")} />
+		<title>{t("site.title")}</title>
 		<script is:inline>
 			(() => {
-				const savedTheme = localStorage.getItem("theme");
-				const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-				const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
-				document.documentElement.classList.toggle("dark", isDark);
+				const applyTheme = () => {
+					let savedTheme = null;
+					try {
+						savedTheme = localStorage.getItem("theme");
+					} catch {}
+					const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+					const isDark = savedTheme ? savedTheme === "dark" : prefersDark;
+					document.documentElement.classList.toggle("dark", isDark);
+				};
+				applyTheme();
+				window.addEventListener("pageshow", (event) => {
+					if (event.persisted) applyTheme();
+				});
 			})();
 		</script>
 	</head>

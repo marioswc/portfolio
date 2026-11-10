@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { useTranslations } from "@i18n/utils";
 
 interface Props {
   id: string;
@@ -9,6 +10,7 @@ interface Props {
   ariaLabel?: string;
 }
 const { id, title, btnClass = "", dialClass = "", ariaLabel } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <style>
@@ -77,14 +79,14 @@ const { id, title, btnClass = "", dialClass = "", ariaLabel } = Astro.props;
         <div>
           <h2
             id={`${id}-title`}
-            class="text-text text-xl font-semibold capitalize"
+            class="text-text text-xl font-semibold"
           >
             {title}
           </h2>
         </div>
         <button
           class="text-sm font-medium cursor-pointer bg-none text-muted p-2 rounded-full hover:bg-primary-hover transition-colors duration-300 ease-linear"
-          aria-label="Close"
+          aria-label={t("modal.close")}
         >
           <Icon name="cross" class="size-5" aria-hidden="true" />
         </button>
@@ -120,15 +122,16 @@ const { id, title, btnClass = "", dialClass = "", ariaLabel } = Astro.props;
       const modal = document.getElementById(
         modalId,
       ) as HTMLDialogElement | null;
-      modal?.showModal();
+      if (modal && !modal.open) {
+        modal.showModal();
+      }
     });
   });
 
   const modals = document.querySelectorAll<HTMLDialogElement>("dialog");
   modals.forEach((modal) => {
     modal.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (target.tagName === "DIALOG") {
+      if (event.target === modal && modal.open) {
         modal.close();
       }
     });

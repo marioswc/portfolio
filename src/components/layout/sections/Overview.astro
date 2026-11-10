@@ -1,22 +1,22 @@
 ---
 import CardSection from "@components/ui/CardSection.astro";
 import StackRender from "./renders/StackRender.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <CardSection pinned={true} year={2026}>
   <p>
-    Heyy! I'm Mario, a full-stack developer. I'm the kind of person who prefers
-    to step back, figure out the real problem, and then start building.
+    {t("overview.intro")}
   </p>
 </CardSection>
-<CardSection pinned={false} year={2024} load="lazy">
+<CardSection pinned={false} year={2024}>
   <p>
-    I love music so that's why I built a feature to show the last song I
-    listened to on Spotify. You can check it out (using lastfm API for
-    limitations in spotify API).
+    {t("overview.music")}
   </p>
 </CardSection>
-<CardSection pinned={false} year={2023} load="lazy">
-  <p>My day-to-day stack</p>
+<CardSection pinned={false} year={2023}>
+  <p>{t("overview.stack")}</p>
   <StackRender />
 </CardSection>

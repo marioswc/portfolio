@@ -5,6 +5,9 @@ import Button from "@components/ui/Button.astro";
 import { Icon } from "astro-icon/components";
 import ProfileInfo from "./Info.astro";
 import ViewResume from "./ViewResume.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <Banner />
@@ -17,7 +20,7 @@ import ViewResume from "./ViewResume.astro";
   <div class="w-full px-2 flex items-center justify-end gap-2 mt-2">
     <Button
       href="https://www.linkedin.com/in/marioswc/"
-      ariaLabel="Contact on LinkedIn"
+      ariaLabel={t("profile.contactLinkedin")}
       clazz="border border-line p-2 rounded-full bg-bg text-text hover:bg-primary-hover"
     >
       <Icon name="chat" class="size-5" aria-hidden="true" />

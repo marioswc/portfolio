@@ -1,14 +1,32 @@
 [
     {
         "year": 2026,
-        "title": "Currently looking for my first role",
-        "important": "developer",
-        "comment": "I've been building web applications with React, Node.js, and PostgreSQL"
+        "title": {
+            "en": "Currently looking for my first role",
+            "es": "Buscando actualmente mi primer puesto"
+        },
+        "important": {
+            "en": "developer",
+            "es": "desarrollador"
+        },
+        "comment": {
+            "en": "I've been building web applications with React, Node.js, and PostgreSQL",
+            "es": "he estado construyendo aplicaciones web con React, Node.js y PostgreSQL"
+        }
     },
     {
         "year": 2026,
-        "title": "Recently graduated from university",
-        "important": "Engineer in Computer Systems",
-        "comment": "I am eager to apply my skills in a professional setting :)"
+        "title": {
+            "en": "Recently graduated from university",
+            "es": "Recién graduado de la universidad"
+        },
+        "important": {
+            "en": "Engineer in Computer Systems",
+            "es": "Ingeniero en Sistemas Computacionales"
+        },
+        "comment": {
+            "en": "I am eager to apply my skills in a professional setting :)",
+            "es": "estoy entusiasmado por aplicar mis habilidades en un entorno profesional :)"
+        }
     }
 ]

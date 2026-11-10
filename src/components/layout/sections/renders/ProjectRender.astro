@@ -4,6 +4,10 @@ import { Image } from "astro:assets";
 import Projects from "@data/projects.json";
 import CardSection from "@components/ui/CardSection.astro";
 import ButtonRepo from "@components/ui/ButtonRepo.astro";
+import { getLang, useTranslations } from "@i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(Astro.currentLocale);
 
 const projectImages = import.meta.glob<{ default: ImageMetadata }>(
   "/src/assets/images/projects/*.{webp,png,jpg,jpeg}",
@@ -21,7 +25,7 @@ const getProjectImage = (filename: string) =>
       <CardSection pinned={false} year={item.year} load="lazy">
         <p class="text-text text-sm">
           <strong class="font-semibold text-text">{item.title} </strong>—{" "}
-          {item.summary}
+          {item.summary[lang]}
         </p>
         <ul class="flex items-center list-none gap-1 flex-wrap">
           {item.tags.map((tag) => (
@@ -37,7 +41,7 @@ const getProjectImage = (filename: string) =>
             <figure class="mt-2 border border-line shadow-xs max-w-md aspect-video overflow-hidden rounded-lg">
               <Image
                 src={projectImage}
-                alt={`Preview of ${item.title}`}
+                alt={`${t("projects.previewAlt")} ${item.title}`}
                 width={896}
                 widths={[448, 896]}
                 sizes="(max-width: 640px) 100vw, 448px"
@@ -56,8 +60,8 @@ const getProjectImage = (filename: string) =>
           img={projectImage}
           code_url={item.code_url}
           demo_url={item.demo_url}
-          desc={item.description}
-          features={item.features}
+          desc={item.description[lang]}
+          features={item.features[lang]}
           stack={item.tags}
         />
       </CardSection>

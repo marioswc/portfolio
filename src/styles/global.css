@@ -21,6 +21,8 @@
     --color-text-secondary: var(--text-secondary);
     --color-muted: var(--muted);
     --color-primary: var(--primary);
+    --color-bg-status: var(--bg-status);
+    --color-bg-status-2: var(--bg-status-2);
 }
 
 @layer base {
@@ -31,6 +33,8 @@
         --bg: #FAFAF9;
         --bg-header: rgba(250, 250, 249, 0.796);
         --bg-modal: rgba(250, 250, 249, 0.945);
+        --bg-status: #02dc06;
+        --bg-status-2: #02a805;
         --bg-secondary: #0A0D0B;
         --tile: #F1F3F0;
         --line: #E2E6E1;
@@ -48,6 +52,8 @@
         --bg: #000000;
         --bg-header: rgba(10, 13, 11, 0.796);
         --bg-modal: rgba(10, 13, 11, 0.945);
+        --bg-status: #01be04;
+        --bg-status-2: #02ec06;
         --bg-secondary: #FAFAF9;
         --tile: #141A16;
         --line: #222924;

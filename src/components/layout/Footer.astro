@@ -1,6 +1,9 @@
 ---
 import Logo from "@assets/logo.svg";
+import { useTranslations } from "@i18n/utils";
+
 const year = new Date().getFullYear();
+const t = useTranslations(Astro.currentLocale);
 ---
 
 <footer class="border-t border-line p-2 text-[13px] text-muted">
@@ -9,6 +12,6 @@ const year = new Date().getFullYear();
       <Logo class="size-4" aria-hidden="true" />
       <small class="font-semibold text-text">Mario Mendoza</small>
     </figure>
-    <small>&copy; {year} All rights reserved</small>
+    <small>&copy; {year} {t("footer.rights")}</small>
   </div>
 </footer>
