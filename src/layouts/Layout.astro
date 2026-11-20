@@ -1,24 +1,203 @@
 ---
 import "../styles/global.css";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { getAbsoluteLocaleUrl } from "astro:i18n";
 import { getLang, useTranslations } from "@i18n/utils";
+import bannerImg from "@assets/images/banner.jpeg";
+import profileImg from "@assets/images/pp.jpeg";
+import projects from "@data/projects.json";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(Astro.currentLocale);
+
+const siteOrigin = Astro.site ?? new URL("https://mariosdev.me");
+const enURL = getAbsoluteLocaleUrl("en", "");
+const esURL = getAbsoluteLocaleUrl("es", "");
+const canonicalURL = lang === "es" ? esURL : enURL;
+const ogLocale = lang === "es" ? "es_MX" : "en_US";
+const ogAlternateLocale = lang === "es" ? "en_US" : "es_MX";
+
+const ogImageURL = new URL(bannerImg.src, siteOrigin).toString();
+const profileImageURL = new URL(profileImg.src, siteOrigin).toString();
+const resumeURL = new URL("/resumeMarioMendoza.pdf", siteOrigin).toString();
+
+const jsonLd = {
+	"@context": "https://schema.org",
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": `${siteOrigin.origin}/#website`,
+			url: siteOrigin.origin,
+			name: "Mario Mendoza Portfolio",
+			description: t("site.description"),
+			inLanguage: ["en", "es"],
+			publisher: {
+				"@id": `${siteOrigin.origin}/#person`,
+			},
+		},
+		{
+			"@type": "ProfilePage",
+			"@id": `${canonicalURL}#profilepage`,
+			url: canonicalURL,
+			name: t("site.title"),
+			description: t("site.description"),
+			inLanguage: lang,
+			isPartOf: {
+				"@id": `${siteOrigin.origin}/#website`,
+			},
+			mainEntity: {
+				"@id": `${siteOrigin.origin}/#person`,
+			},
+		},
+		{
+			"@type": "Person",
+			"@id": `${siteOrigin.origin}/#person`,
+			name: "Mario Alberto Mendoza Cáceres",
+			alternateName: ["Mario Mendoza", "marioswc"],
+			identifier: "marioswc",
+			jobTitle: t("header.role"),
+			description: t("site.description"),
+			url: siteOrigin.origin,
+			image: profileImageURL,
+			email: "mailto:mario.mendozac@icloud.com",
+			address: {
+				"@type": "PostalAddress",
+				addressRegion: "Yucatán / Ciudad de México",
+				addressCountry: "MX",
+			},
+			alumniOf: {
+				"@type": "CollegeOrUniversity",
+				name: "Instituto Tecnológico de Mérida",
+			},
+			hasCredential: {
+				"@type": "EducationalOccupationalCredential",
+				credentialCategory: "degree",
+				name:
+					lang === "es"
+						? "Ingeniería en Sistemas Computacionales"
+						: "Bachelor of Science in Computer Systems Engineering",
+			},
+			knowsLanguage: [
+				{
+					"@type": "Language",
+					name: "Spanish",
+					alternateName: "es",
+				},
+				{
+					"@type": "Language",
+					name: "English",
+					alternateName: "en",
+				},
+			],
+			knowsAbout: [
+				"HTML",
+				"CSS",
+				"JavaScript",
+				"React",
+				"Astro",
+				"Tailwind CSS",
+				"Alpine.js",
+				"PHP",
+				"Laravel",
+				"Python",
+				"Node.js",
+				"MySQL",
+				"PostgreSQL",
+				"Git",
+				"GitHub",
+				"Docker",
+			],
+			sameAs: [
+				"https://github.com/marioswc",
+				"https://www.linkedin.com/in/marioswc/",
+			],
+			subjectOf: {
+				"@type": "DigitalDocument",
+				name: t("resume.alt"),
+				url: resumeURL,
+				encodingFormat: "application/pdf",
+			},
+		},
+		{
+			"@type": "ItemList",
+			"@id": `${canonicalURL}#projects`,
+			name: lang === "es" ? "Proyectos Destacados" : "Featured Projects",
+			itemListElement: projects.map((project, index) => ({
+				"@type": "ListItem",
+				position: index + 1,
+				item: {
+					"@type": "SoftwareSourceCode",
+					name: project.title,
+					description: project.description[lang],
+					url: project.demo_url,
+					codeRepository: project.code_url,
+					programmingLanguage: project.tags,
+					dateCreated: String(project.year),
+					author: {
+						"@id": `${siteOrigin.origin}/#person`,
+					},
+				},
+			})),
+		},
+	],
+};
 ---
 <!doctype html>
 <html lang={lang}>
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="icon" href="/favicon.ico" sizes="32x32" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="alternate" hreflang="en" href={getRelativeLocaleUrl("en", "")} />
-		<link rel="alternate" hreflang="es" href={getRelativeLocaleUrl("es", "")} />
-		<link rel="alternate" hreflang="x-default" href={getRelativeLocaleUrl("en", "")} />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="description" content={t("site.description")} />
+
+		<!-- Canonical & Hreflang -->
+		<link rel="canonical" href={canonicalURL} />
+		<link rel="alternate" hreflang="en" href={enURL} />
+		<link rel="alternate" hreflang="es" href={esURL} />
+		<link rel="alternate" hreflang="x-default" href={enURL} />
+
+		<!-- Sitemap & AI / LLM Context Discovery -->
+		<link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+		<link rel="alternate" type="text/plain" href="/llms.txt" title="LLM Context" />
+
+		<!-- Primary Meta Tags -->
 		<title>{t("site.title")}</title>
+		<meta name="title" content={t("site.title")} />
+		<meta name="description" content={t("site.description")} />
+		<meta name="keywords" content={t("site.keywords")} />
+		<meta name="author" content="Mario Alberto Mendoza Cáceres" />
+		<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAFAF9" />
+		<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000" />
+
+		<!-- Open Graph / Facebook / LinkedIn -->
+		<meta property="og:type" content="profile" />
+		<meta property="og:site_name" content="Mario Mendoza (@marioswc)" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={t("site.title")} />
+		<meta property="og:description" content={t("site.description")} />
+		<meta property="og:locale" content={ogLocale} />
+		<meta property="og:locale:alternate" content={ogAlternateLocale} />
+		<meta property="og:image" content={ogImageURL} />
+		<meta property="og:image:alt" content={t("profile.bannerAlt")} />
+		<meta property="og:image:width" content={String(bannerImg.width)} />
+		<meta property="og:image:height" content={String(bannerImg.height)} />
+		<meta property="profile:first_name" content="Mario" />
+		<meta property="profile:last_name" content="Mendoza" />
+		<meta property="profile:username" content="marioswc" />
+
+		<!-- Twitter / X -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonicalURL} />
+		<meta name="twitter:title" content={t("site.title")} />
+		<meta name="twitter:description" content={t("site.description")} />
+		<meta name="twitter:image" content={ogImageURL} />
+		<meta name="twitter:image:alt" content={t("profile.bannerAlt")} />
+		<meta name="twitter:creator" content="@marioswc" />
+
+		<!-- Structured Data (JSON-LD) -->
+		<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
 		<script is:inline>
 			(() => {
 				const applyTheme = () => {

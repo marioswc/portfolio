@@ -1,0 +1,46 @@
+# Mario Alberto Mendoza Cáceres (@marioswc)
+
+> Full-Stack Software Developer and Computer Systems Engineer (Ingeniero en Sistemas Computacionales) based in Mexico. Focused on understanding the real problem first and building clean, responsive, and maintainable web applications using Laravel, PHP, JavaScript, React, Node.js, Tailwind CSS, and SQL databases. Currently open to hire.
+
+## Profile & Contact
+
+- **Full Name**: Mario Alberto Mendoza Cáceres (Mario Mendoza)
+- **Handle**: `@marioswc`
+- **Role**: Full-Stack Software Developer / Junior Software Developer
+- **Status**: Open to hire
+- **Location**: Mexico City / Yucatán, Mexico
+- **Email**: [mario.mendozac@icloud.com](mailto:mario.mendozac@icloud.com)
+- **Portfolio (English)**: [https://mariosdev.me/](https://mariosdev.me/)
+- **Portfolio (Spanish)**: [https://mariosdev.me/es/](https://mariosdev.me/es/)
+- **Resume (PDF)**: [https://mariosdev.me/resumeMarioMendoza.pdf](https://mariosdev.me/resumeMarioMendoza.pdf)
+- **GitHub**: [https://github.com/marioswc](https://github.com/marioswc)
+- **LinkedIn**: [https://www.linkedin.com/in/marioswc/](https://www.linkedin.com/in/marioswc/)
+
+## Technical Skills & Stack
+
+- **Frontend**: HTML, CSS, JavaScript, React, Astro, Tailwind CSS, Alpine.js
+- **Backend**: PHP, Laravel, Node.js, Python
+- **Databases**: MySQL, PostgreSQL
+- **Tools & Infrastructure**: Git, GitHub, Docker, Vite
+
+## Professional Experience
+
+### Freelance — Software Developer (2025 – Present)
+- Architected responsive web applications leveraging Laravel, JavaScript, PHP, and Tailwind CSS to ensure seamless cross-device compatibility.
+- Engineered frontend interfaces and complex backend functionality for diverse freelance projects, focusing on robust system logic.
+
+## Education
+
+### Instituto Tecnológico de Mérida (2022 – 2026)
+- **Degree**: Bachelor of Science in Computer Systems Engineering (Ingeniero en Sistemas Computacionales), Software Developer.
+
+## Featured Projects
+
+- **[DSAC System](https://github.com/marioswc/dsac)** (2026) — Web platform for managing clients, appointments, services, and tax/accounting files for an accounting firm. Built with Laravel, PHP, MySQL, Tailwind CSS, and Alpine.js. Features public landing page, client tax & file management, multi-status appointment scheduling flow, PDF generation, email notifications, dynamic service catalog, and role-based admin portals.
+- **[DailyQuo](https://dailyquo.vercel.app/)** (2026) — Minimalist web application that delivers a single inspirational quote for each day of the year, built in React and JavaScript with external API integration, day-of-year quote mapping, automatic midnight rollover, local storage caching, debounced clipboard copy, and modular hook architecture. Source code: [https://github.com/marioswc/dailyquo](https://github.com/marioswc/dailyquo)
+- **[TaskFlow](https://to-do-list-ten-bay-47.vercel.app/)** (2026) — Fast, zero-dependency task management web application built with modular vanilla JavaScript, HTML, Tailwind CSS, and Vite. Features seamless task CRUD, persistent browser storage, and context-aware empty states. Source code: [https://github.com/marioswc/to-do-list](https://github.com/marioswc/to-do-list)
+
+## Languages
+
+- **Spanish**: Native
+- **English**: Intermediate (B1)
