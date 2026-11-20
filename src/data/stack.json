@@ -1,17 +1,24 @@
 [
     {
         "category": {
+            "en": "Languages",
+            "es": "Lenguajes"
+        },
+        "skills": ["JavaScript", "PHP", "Python"]
+    },
+    {
+        "category": {
             "en": "Frontend",
             "es": "Frontend"
         },
-        "skills": ["HTML", "CSS", "JavaScript", "Tailwind CSS"]
+        "skills": ["HTML", "CSS", "React", "Tailwind CSS"]
     },
     {
         "category": {
             "en": "Backend",
             "es": "Backend"
         },
-        "skills": ["PHP", "Python", "Node.js"]
+        "skills": ["Laravel", "Node.js"]
     },
     {
         "category": {
@@ -22,9 +29,9 @@
     },
     {
         "category": {
-            "en": "Tool",
+            "en": "Tools",
             "es": "Herramientas"
         },
-        "skills": ["Git", "GitHub", "Docker"]
+        "skills": ["Git", "GitHub", "Docker", "Vite"]
     }
 ]

@@ -44,7 +44,7 @@
             "en": "Web system for managing appointments, clients, services, and files for a tax and accounting firm, built with Laravel.",
             "es": "Sistema web para la gestión de citas, clientes, servicios y archivos de un despacho contable y fiscal, desarrollado con Laravel."
         },
-        "tags": ["PHP", "MySQL", "TailwindCSS", "AlpineJS"],
+        "tags": ["Laravel", "PHP", "MySQL", "TailwindCSS", "AlpineJS"],
         "features": {
             "en": [
                 "Public Landing",
