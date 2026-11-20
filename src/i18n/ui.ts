@@ -7,7 +7,7 @@ export type Lang = keyof typeof languages;
 export const defaultLang: Lang = "en";
 
 const en = {
-  "site.title": "Mario Mendoza (@marioswc) | Full-Stack Software Developer",
+  "site.title": "Mario Mendoza | Software Developer",
   "site.description": "Full-Stack Software Developer & Computer Systems Engineer in Mexico. Building web applications with Laravel, PHP, JavaScript, React, Tailwind CSS, and SQL.",
   "site.keywords": "Mario Mendoza, Mario Alberto Mendoza Cáceres, marioswc, Software Developer, Full-Stack Developer, Web Developer, Laravel, PHP, JavaScript, React, Tailwind CSS, MySQL, PostgreSQL, Node.js, Computer Systems Engineer, Mexico",
   "header.role": "Software Developer",
@@ -72,7 +72,7 @@ const en = {
 };
 
 const es: typeof en = {
-  "site.title": "Mario Mendoza (@marioswc) | Desarrollador de Software Full-Stack",
+  "site.title": "Mario Mendoza | Desarrollador de Software",
   "site.description": "Desarrollador de Software Full-Stack e Ingeniero en Sistemas en México. Creando aplicaciones web con Laravel, PHP, JavaScript, React, Tailwind CSS y SQL.",
   "site.keywords": "Mario Mendoza, Mario Alberto Mendoza Cáceres, marioswc, Desarrollador de Software, Desarrollador Full-Stack, Desarrollador Web, Laravel, PHP, JavaScript, React, Tailwind CSS, MySQL, PostgreSQL, Node.js, Ingeniero en Sistemas Computacionales, México",
   "header.role": "Desarrollador de Software",
