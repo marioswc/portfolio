@@ -10,11 +10,11 @@ const t = useTranslations(Astro.currentLocale);
   <Image
     src={Banner}
     alt={t("profile.bannerAlt")}
-    widths={[480, 693, 1386]}
-    sizes="(max-width: 768px) 100vw, 693px"
+    widths={[480, 623, 768, 1090, 1246]}
+    sizes="(max-width: 1023px) 100vw, (max-width: 1280px) calc(100vw - 689px), 623px"
     class="object-cover w-full h-full"
-    width={693}
-    height={173}
+    width={623}
+    height={156}
     draggable="false"
     fetchpriority="high"
     loading="eager"
