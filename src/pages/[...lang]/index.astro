@@ -1,0 +1,15 @@
+---
+import Main from "@components/Main.astro";
+import Layout from "../../layouts/Layout.astro";
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: "es" } },
+  ];
+}
+---
+
+<Layout>
+  <Main />
+</Layout>

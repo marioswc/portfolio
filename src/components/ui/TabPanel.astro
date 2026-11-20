@@ -3,17 +3,21 @@
 import Overview from "@components/layout/sections/Overview.astro";
 import Projects from "@components/layout/sections/Projects.astro";
 import Journey from "@components/layout/sections/Journey.astro";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
 
 const tabs = [
-  { id: "overview", label: "overview" },
-  { id: "projects", label: "projects" },
-  { id: "journey", label: "journey" },
+  { id: "overview", label: t("tabs.overview") },
+  { id: "projects", label: t("tabs.projects") },
+  { id: "journey", label: t("tabs.journey") },
 ];
 ---
 
 <!-- Tab Menu -->
 <div
   role="tablist"
+  aria-label={t("tabs.ariaLabel")}
   class="flex items-center md:justify-center justify-start mt-5 overflow-auto scrollbar-none border-b border-line"
   id="tab-menu"
 >
@@ -21,6 +25,7 @@ const tabs = [
     tabs.map((tab, index) => (
       <button
         id={tab.id}
+        type="button"
         role="tab"
         aria-controls={`panel-${tab.id}`}
         aria-selected={index === 0 ? "true" : "false"}
@@ -33,13 +38,16 @@ const tabs = [
   }
 </div>
 <div>
-  <div id="panel-overview" role="tabpanel">
+  <div id="panel-overview" role="tabpanel" aria-labelledby="overview">
+    <h2 class="sr-only capitalize">{t("tabs.overview")}</h2>
     <Overview />
   </div>
-  <div id="panel-projects" class="hidden" role="tabpanel">
+  <div id="panel-projects" class="hidden" role="tabpanel" aria-labelledby="projects">
+    <h2 class="sr-only capitalize">{t("tabs.projects")}</h2>
     <Projects />
   </div>
-  <div id="panel-journey" class="hidden" role="tabpanel">
+  <div id="panel-journey" class="hidden" role="tabpanel" aria-labelledby="journey">
+    <h2 class="sr-only capitalize">{t("tabs.journey")}</h2>
     <Journey />
   </div>
 </div>

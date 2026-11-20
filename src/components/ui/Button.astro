@@ -5,12 +5,13 @@ interface Props {
   ariaLabel?: string;
 }
 const { href, clazz = "", ariaLabel } = Astro.props;
+const isExternal = href?.startsWith("http");
 ---
 
 <a
   href={href}
-  target="_blank"
-  rel="noopener noreferrer"
+  target={isExternal ? "_blank" : undefined}
+  rel={isExternal ? "noopener noreferrer" : undefined}
   aria-label={ariaLabel}
   class={`flex justify-center border ${clazz} transition-all duration-300 ease-linear`}
 >

@@ -1,0 +1,112 @@
+---
+const skeletonCards = [
+  { nameWidth: "w-28", metaWidth: "w-16", line1: "w-full", line2: "w-4/5" },
+  { nameWidth: "w-24", metaWidth: "w-20", line1: "w-11/12", line2: "w-3/5" },
+  { nameWidth: "w-28", metaWidth: "w-14", line1: "w-full", line2: "w-2/3" },
+  { nameWidth: "w-24", metaWidth: "w-16", line1: "w-5/6", line2: "w-3/4" },
+  { nameWidth: "w-28", metaWidth: "w-20", line1: "w-full", line2: "w-1/2" },
+  { nameWidth: "w-24", metaWidth: "w-14", line1: "w-11/12", line2: "w-4/5" },
+  { nameWidth: "w-28", metaWidth: "w-16", line1: "w-full", line2: "w-3/5" },
+  { nameWidth: "w-24", metaWidth: "w-20", line1: "w-5/6", line2: "w-2/3" },
+  { nameWidth: "w-28", metaWidth: "w-14", line1: "w-full", line2: "w-3/4" },
+  { nameWidth: "w-24", metaWidth: "w-16", line1: "w-11/12", line2: "w-1/2" },
+];
+---
+
+<div
+  aria-hidden="true"
+  class="skeleton-filler flex-1 basis-0 w-full overflow-hidden flex flex-col select-none pointer-events-none"
+>
+  {
+    skeletonCards.map((card, index) => (
+      <article
+        class={`skeleton-card skeleton-card-${index + 1} px-4 py-2 border-t border-line first:border-t-0 flex-1 items-center`}
+      >
+        <div class="flex items-start gap-2 w-full motion-safe:animate-pulse">
+          <div class="size-12 shrink-0 rounded-full bg-line/80 border border-line" />
+          <div class="flex-1 min-w-0 py-0.5 space-y-2">
+            <div class="flex items-center gap-2">
+              <div class={`h-3.5 ${card.nameWidth} rounded-full bg-line`} />
+              <div class="size-3.5 shrink-0 rounded-full bg-line" />
+              <div class={`h-3 ${card.metaWidth} rounded-full bg-line/70`} />
+            </div>
+            <div class="space-y-1.5">
+              <div class={`h-3 ${card.line1} rounded-full bg-line/80`} />
+              <div class={`h-3 ${card.line2} rounded-full bg-line/60`} />
+            </div>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>
+
+<style>
+  .skeleton-filler {
+    container-type: size;
+  }
+
+  .skeleton-card {
+    display: none;
+  }
+
+  @container (min-height: 68px) {
+    .skeleton-card-1 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 148px) {
+    .skeleton-card-2 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 228px) {
+    .skeleton-card-3 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 308px) {
+    .skeleton-card-4 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 388px) {
+    .skeleton-card-5 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 468px) {
+    .skeleton-card-6 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 548px) {
+    .skeleton-card-7 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 628px) {
+    .skeleton-card-8 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 708px) {
+    .skeleton-card-9 {
+      display: flex;
+    }
+  }
+
+  @container (min-height: 788px) {
+    .skeleton-card-10 {
+      display: flex;
+    }
+  }
+</style>

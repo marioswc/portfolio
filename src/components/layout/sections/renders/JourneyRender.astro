@@ -1,14 +1,20 @@
 ---
 import Journey from "@data/journey.json";
 import CardSection from "@components/ui/CardSection.astro";
+import { getLang, useTranslations } from "@i18n/utils";
+
+const lang = getLang(Astro.currentLocale);
+const t = useTranslations(Astro.currentLocale);
 ---
 
 {
   Journey.map((item) => (
-    <CardSection pinned={false} year={item.year}>
-      <p>
-        {item.title} as {item.important}, {item.comment}
-      </p>
+    <CardSection pinned={false} year={item.year} load="lazy">
+      <div>
+        <h3 class="inline font-inter tracking-normal font-medium text-sm text-text">
+          {item.title[lang]} {t("journey.as")} {item.important[lang]}
+        </h3>, {item.comment[lang]}
+      </div>
     </CardSection>
   ))
 }

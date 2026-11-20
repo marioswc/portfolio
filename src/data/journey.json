@@ -1,14 +1,47 @@
 [
     {
         "year": 2026,
-        "title": "Currently looking for my first role",
-        "important": "developer",
-        "comment": "I've been building web applications with React, Node.js, and PostgreSQL"
+        "title": {
+            "en": "Currently looking for my first role",
+            "es": "Buscando actualmente mi primer puesto"
+        },
+        "important": {
+            "en": "Full-Stack Software Developer",
+            "es": "Desarrollador de Software Full-Stack"
+        },
+        "comment": {
+            "en": "I've been building web applications with Laravel, React, Node.js, MySQL, and PostgreSQL.",
+            "es": "he estado construyendo aplicaciones web con Laravel, React, Node.js, MySQL y PostgreSQL."
+        }
     },
     {
         "year": 2026,
-        "title": "Recently graduated from university",
-        "important": "Engineer in Computer Systems",
-        "comment": "I am eager to apply my skills in a professional setting :)"
+        "title": {
+            "en": "Graduated from Instituto Tecnológico de Mérida",
+            "es": "Graduado del Instituto Tecnológico de Mérida"
+        },
+        "important": {
+            "en": "Computer Systems Engineer",
+            "es": "Ingeniero en Sistemas Computacionales"
+        },
+        "comment": {
+            "en": "I am eager to apply my skills in a professional setting :)",
+            "es": "estoy entusiasmado por aplicar mis habilidades en un entorno profesional :)"
+        }
+    },
+    {
+        "year": 2025,
+        "title": {
+            "en": "Working on freelance projects",
+            "es": "Trabajando en proyectos freelance"
+        },
+        "important": {
+            "en": "Software Developer",
+            "es": "Desarrollador de Software"
+        },
+        "comment": {
+            "en": "architecting responsive web applications and backend logic with Laravel, PHP, JavaScript, and Tailwind CSS.",
+            "es": "desarrollando aplicaciones web responsivas y lógica backend con Laravel, PHP, JavaScript y Tailwind CSS."
+        }
     }
 ]

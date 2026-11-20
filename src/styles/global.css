@@ -2,6 +2,8 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/geist";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --font-inter: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
     --font-geist: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
@@ -19,15 +21,20 @@
     --color-text-secondary: var(--text-secondary);
     --color-muted: var(--muted);
     --color-primary: var(--primary);
+    --color-bg-status: var(--bg-status);
+    --color-bg-status-2: var(--bg-status-2);
 }
 
 @layer base {
     :root {
+        color-scheme: light;
         --primary-hover: #ededed;
         --secondary-hover: #313131;
         --bg: #FAFAF9;
         --bg-header: rgba(250, 250, 249, 0.796);
         --bg-modal: rgba(250, 250, 249, 0.945);
+        --bg-status: #02dc06;
+        --bg-status-2: #02a805;
         --bg-secondary: #0A0D0B;
         --tile: #F1F3F0;
         --line: #E2E6E1;
@@ -35,7 +42,26 @@
         --text: #111714;
         --text-secondary: #FAFAF9;
         --muted: #55605A;
-        --primary: #1999d0;
+        --primary: #1595d0;
+    }
+
+    .dark {
+        color-scheme: dark;
+        --primary-hover: #313131;
+        --secondary-hover: #ededed;
+        --bg: #000000;
+        --bg-header: rgba(10, 13, 11, 0.796);
+        --bg-modal: rgba(10, 13, 11, 0.945);
+        --bg-status: #01be04;
+        --bg-status-2: #02ec06;
+        --bg-secondary: #FAFAF9;
+        --tile: #141A16;
+        --line: #222924;
+        --line-selected: #FAFAF9;
+        --text: #FAFAF9;
+        --text-secondary: #111714;
+        --muted: #9CA6A0;
+        --primary: #1595d0;
     }
 
     html, body {
@@ -48,6 +74,12 @@
         color: var(--text);
         font-family: var(--font-inter);
         transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        body {
+            transition: none;
+        }
     }
 
     h1, h2,h3, h4, h5, h6 {

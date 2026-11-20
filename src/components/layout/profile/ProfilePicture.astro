@@ -1,21 +1,43 @@
 ---
 import { Image } from "astro:assets";
 import ppicture from "@assets/images/pp.jpeg";
+import { useTranslations } from "@i18n/utils";
+
+const t = useTranslations(Astro.currentLocale);
+
 interface Props {
   load?: "lazy" | "eager" | undefined;
+  priority?: boolean;
   clazz?: string;
+  alt?: string;
+  widths?: number[];
+  sizes?: string;
 }
-const { load, clazz } = Astro.props;
+const {
+  load = "lazy",
+  priority = false,
+  clazz,
+  alt = t("profile.pictureAlt"),
+  widths = [48, 96, 128, 256],
+  sizes = "48px",
+} = Astro.props;
 ---
 
-<figure class=`${clazz} rounded-full overflow-hidden border-line`>
+<figure
+  aria-hidden={alt === "" ? "true" : undefined}
+  class={`${clazz} aspect-square rounded-full overflow-hidden border-line`}
+>
   <Image
     src={ppicture}
-    alt="Foto de perfil"
-    class="w-full object-cover"
-    width="250"
-    height="250"
+    alt={alt}
+    widths={widths}
+    sizes={sizes}
+    class="w-full h-full object-cover"
+    width={256}
+    height={256}
     draggable="false"
     loading={load}
+    fetchpriority={priority ? "high" : load === "lazy" ? "low" : "auto"}
+    decoding="async"
   />
 </figure>
