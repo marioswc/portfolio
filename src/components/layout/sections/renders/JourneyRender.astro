@@ -10,9 +10,11 @@ const t = useTranslations(Astro.currentLocale);
 {
   Journey.map((item) => (
     <CardSection pinned={false} year={item.year} load="lazy">
-      <p>
-        {item.title[lang]} {t("journey.as")} {item.important[lang]}, {item.comment[lang]}
-      </p>
+      <div>
+        <h3 class="inline font-inter tracking-normal font-medium text-sm text-text">
+          {item.title[lang]} {t("journey.as")} {item.important[lang]}
+        </h3>, {item.comment[lang]}
+      </div>
     </CardSection>
   ))
 }

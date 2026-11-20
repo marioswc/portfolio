@@ -23,10 +23,10 @@ const getProjectImage = (filename: string) =>
     const projectImage = getProjectImage(item.image);
     return (
       <CardSection pinned={false} year={item.year} load="lazy">
-        <p class="text-text text-sm">
-          <strong class="font-semibold text-text">{item.title} </strong>—{" "}
+        <div class="text-text text-sm">
+          <h3 class="inline font-inter tracking-normal font-semibold text-text text-sm">{item.title}</h3>{" "}—{" "}
           {item.summary[lang]}
-        </p>
+        </div>
         <ul class="flex items-center list-none gap-1 flex-wrap">
           {item.tags.map((tag) => (
             <li>
