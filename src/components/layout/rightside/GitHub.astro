@@ -1,36 +1,79 @@
 ---
 import { useTranslations } from "@i18n/utils";
-
 const t = useTranslations(Astro.currentLocale);
 
+// Cache en el Edge de Cloudflare por 5 minutos (300s) y sirve stale mientras revalida por 10 min
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, s-maxage=300, stale-while-revalidate=600"
+);
+
+const userUrl = "https://api.github.com/users/marioswc";
+const reposUrl =
+  "https://api.github.com/users/marioswc/repos?sort=pushed&per_page=100";
+
+const ghHeaders: HeadersInit = {
+  Accept: "application/vnd.github.v3+json",
+  "User-Agent": "mariosdev-portfolio",
+};
+
+async function getGitHubInfo() {
+  try {
+    const [userRes, reposRes] = await Promise.all([
+      fetch(userUrl, { headers: ghHeaders }),
+      fetch(reposUrl, { headers: ghHeaders }),
+    ]);
+    if (!userRes.ok || !reposRes.ok) {
+      throw new Error("Failed to fetch GitHub info");
+    }
+    const user = await userRes.json();
+    const repos = await reposRes.json();
+    // Count the number of repositories for each language
+    const langCounter: Record<string, number> = {};
+    for (const repo of repos) {
+      if (repo.language && !repo.fork) {
+        langCounter[repo.language] = (langCounter[repo.language] || 0) + 1;
+      }
+    }
+    // Sort the lang counter
+    const topLang =
+      Object.entries(langCounter).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "N/A";
+
+    return {
+      lastPush: repos[0]?.name ?? "portfolio",
+      totalRepos: user.public_repos ?? repos.length,
+      followers: user.followers ?? 0,
+      topLang,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      lastPush: "portfolio",
+      totalRepos: 0,
+      followers: 0,
+      topLang: "JavaScript",
+    };
+  }
+}
+
+const githubInfo = await getGitHubInfo();
 const dataGit = [
-  {
-    label: t("github.lastPush"),
-    value: "portfolio",
-  },
-  {
-    label: t("github.totalRepos"),
-    value: "10",
-  },
-  {
-    label: t("github.followers"),
-    value: "10",
-  },
-  {
-    label: t("github.topLanguage"),
-    value: "JavaScript",
-  },
+  { label: t("github.lastPush"), value: githubInfo.lastPush },
+  { label: t("github.totalRepos"), value: githubInfo.totalRepos },
+  { label: t("github.followers"), value: githubInfo.followers },
+  { label: t("github.topLanguage"), value: githubInfo.topLang },
 ];
 ---
 
 <h2 class="text-xl font-extrabold text-text mb-1">{t("github.title")}</h2>
 <div class="flex flex-col gap-4 items-start">
-    {
-        dataGit.map((data) => (
-            <div class="flex flex-col items-start">
-                <span class="text-muted text-sm leading-4">{data.label}</span>
-                <span class="text-text text-lg font-extrabold font-geist tracking-tight">{data.value}</span>
-            </div>
-        ))
-    }
+  {dataGit.map((data) => (
+    <div class="flex flex-col items-start">
+      <span class="text-muted text-sm leading-4">{data.label}</span>
+      <span class="text-text text-lg font-extrabold font-geist tracking-tight">
+        {data.value}
+      </span>
+    </div>
+  ))}
 </div>
+
