@@ -2,7 +2,7 @@
 import { useTranslations } from "@i18n/utils";
 const t = useTranslations(Astro.currentLocale);
 
-// Cache en el Edge de Cloudflare por 5 minutos (300s) y sirve stale mientras revalida por 10 min
+// cache control for Cloudflare
 Astro.response.headers.set(
   "Cache-Control",
   "public, s-maxage=300, stale-while-revalidate=600"
@@ -17,17 +17,58 @@ const ghHeaders: HeadersInit = {
   "User-Agent": "mariosdev-portfolio",
 };
 
-async function getGitHubInfo() {
+type GitHubStats = {
+  lastPush: string;
+  totalRepos: number;
+  followers: number;
+  topLang: string;
+};
+
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos
+
+// Global cache to store GitHub stats and their expiration time
+const globalCache = globalThis as unknown as {
+  __ghStatsCache?: { data: GitHubStats; expiresAt: number };
+};
+
+const FALLBACK_STATS: GitHubStats = {
+  lastPush: "portfolio",
+  totalRepos: 10,
+  followers: 10,
+  topLang: "JavaScript",
+};
+
+async function getGitHubInfo(): Promise<GitHubStats> {
+  const now = Date.now();
+  const cached = globalCache.__ghStatsCache;
+
+  // if cached data exists and is still valid, return it
+  if (cached && now < cached.expiresAt) {
+    return cached.data;
+  }
+
   try {
+    // options for fetch, including cache settings for Cloudflare
+    const fetchOptions: RequestInit & { cf?: Record<string, unknown> } = {
+      headers: ghHeaders,
+      cf: {
+        cacheTtl: 300,
+        cacheEverything: true,
+      },
+    };
+
     const [userRes, reposRes] = await Promise.all([
-      fetch(userUrl, { headers: ghHeaders }),
-      fetch(reposUrl, { headers: ghHeaders }),
+      fetch(userUrl, fetchOptions),
+      fetch(reposUrl, fetchOptions),
     ]);
+
     if (!userRes.ok || !reposRes.ok) {
-      throw new Error("Failed to fetch GitHub info");
+      throw new Error(`Failed to fetch GitHub info (${userRes.status} / ${reposRes.status})`);
     }
+
     const user = await userRes.json();
     const repos = await reposRes.json();
+
     // Count the number of repositories for each language
     const langCounter: Record<string, number> = {};
     for (const repo of repos) {
@@ -35,24 +76,30 @@ async function getGitHubInfo() {
         langCounter[repo.language] = (langCounter[repo.language] || 0) + 1;
       }
     }
+
     // Sort the lang counter
     const topLang =
-      Object.entries(langCounter).sort((a, b) => b[1] - a[1])[0]?.[0] ?? "N/A";
+      Object.entries(langCounter).sort((a, b) => b[1] - a[1])[0]?.[0] ??
+      FALLBACK_STATS.topLang;
 
-    return {
-      lastPush: repos[0]?.name ?? "portfolio",
+    const freshData: GitHubStats = {
+      lastPush: repos[0]?.name ?? FALLBACK_STATS.lastPush,
       totalRepos: user.public_repos ?? repos.length,
-      followers: user.followers ?? 0,
+      followers: user.followers ?? FALLBACK_STATS.followers,
       topLang,
     };
+
+    // Store in cache
+    globalCache.__ghStatsCache = {
+      data: freshData,
+      expiresAt: now + CACHE_TTL_MS,
+    };
+
+    return freshData;
   } catch (error) {
     console.error(error);
-    return {
-      lastPush: "portfolio",
-      totalRepos: 0,
-      followers: 0,
-      topLang: "JavaScript",
-    };
+    // if fetching fails, return cached data if available, otherwise fallback
+    return cached?.data ?? FALLBACK_STATS;
   }
 }
 
