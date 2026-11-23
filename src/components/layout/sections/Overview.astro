@@ -2,19 +2,33 @@
 import CardSection from "@components/ui/CardSection.astro";
 import StackRender from "./renders/StackRender.astro";
 import { useTranslations } from "@i18n/utils";
+import Music from "../leftside/Music.astro";
 
 const t = useTranslations(Astro.currentLocale);
 ---
 
 <CardSection pinned={true} year={2026}>
-  <p>
-    {t("overview.intro")}
-  </p>
+  <p>{t("overview.intro")}</p>
 </CardSection>
 <CardSection pinned={false} year={2024}>
   <p>
     {t("overview.music")}
   </p>
+  <div class="block lg:hidden mt-2 border border-line shadow-xs rounded-lg p-4 max-w-lg w-full">
+    <Music server:defer>
+      <div slot="fallback" class="w-full">
+        <h2 class="text-xl font-extrabold text-text mb-1">{t("music.title")}</h2>
+        <div class="flex items-center justify-start gap-2 motion-safe:animate-pulse">
+          <div class="size-16 shrink-0 rounded-lg bg-line/80 shadow-sm" />
+          <div class="flex flex-col items-start gap-1.5 ml-2">
+            <span class="h-5 w-28 rounded-md bg-line/80" />
+            <span class="h-3.5 w-20 rounded-md bg-line/70" />
+            <span class="h-3 w-14 rounded-md bg-line/60" />
+          </div>
+        </div>
+      </div>
+    </Music>
+  </div>
 </CardSection>
 <CardSection pinned={false} year={2023}>
   <h3 class="font-inter tracking-normal">{t("overview.stack")}</h3>
