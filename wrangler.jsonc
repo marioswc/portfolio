@@ -2,6 +2,9 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "portfolio",
   "compatibility_date": "2026-11-17",
+  "assets": {
+    "not_found_handling": "404-page"
+  },
   "observability": {
     "enabled": true
   },
