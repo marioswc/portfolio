@@ -1,37 +1,44 @@
 [
     {
         "category": {
-            "en": "Languages",
-            "es": "Lenguajes"
-        },
-        "skills": ["JavaScript", "PHP", "Python"]
-    },
-    {
-        "category": {
             "en": "Frontend",
             "es": "Frontend"
         },
-        "skills": ["HTML", "CSS", "React", "Tailwind CSS"]
+        "skills": ["HTML", "CSS", "Tailwind CSS"]
+    },
+    {
+        "category": {
+            "en": "Languages",
+            "es": "Lenguajes"
+        },
+        "skills": ["JavaScript", "TypeScript"]
     },
     {
         "category": {
             "en": "Backend",
             "es": "Backend"
         },
-        "skills": ["Laravel", "Node.js"]
+        "skills": ["PHP", "Node.js"]
     },
     {
         "category": {
-            "en": "Database",
+            "en": "Frameworks",
+            "es": "Frameworks"
+        },
+        "skills": ["Laravel", "React", "React Native", "Astro"]
+    },
+    {
+        "category": {
+            "en": "Databases",
             "es": "Bases de datos"
         },
-        "skills": ["MySQL", "PostgreSQL"]
+        "skills": ["MySQL", "PostgreSQL", "Supabase"]
     },
     {
         "category": {
-            "en": "Tools",
-            "es": "Herramientas"
+            "en": "Technologies / Tools",
+            "es": "Tecnologías / Herramientas"
         },
-        "skills": ["Git", "GitHub", "Docker", "Vite"]
+        "skills": ["Git", "GitHub", "Docker"]
     }
 ]

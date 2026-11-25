@@ -34,3 +34,4 @@ Allow: /
 # Sitemaps & LLM Context
 Sitemap: https://mariosdev.me/sitemap.xml
 # LLM Context file: https://mariosdev.me/llms.txt
+# ARD AI Catalog: https://mariosdev.me/.well-known/ai-catalog.json

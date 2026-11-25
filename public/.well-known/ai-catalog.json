@@ -1,0 +1,38 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Mario Mendoza (@marioswc)",
+    "identifier": "did:web:mariosdev.me",
+    "documentationUrl": "https://mariosdev.me/llms.txt",
+    "logoUrl": "https://mariosdev.me/favicon.svg"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:mariosdev.me:context:portfolio-profile",
+      "displayName": "Mario Mendoza — Developer Portfolio & Resume Context",
+      "type": "application/agent-skills+md",
+      "url": "https://mariosdev.me/llms.txt",
+      "description": "Structured profile, technical stack, professional experience, education, and project documentation for Full-Stack Software Developer Mario Alberto Mendoza Cáceres.",
+      "version": "1.0.0",
+      "tags": [
+        "portfolio",
+        "software-developer",
+        "full-stack",
+        "laravel",
+        "react",
+        "react-native",
+        "typescript",
+        "javascript",
+        "astro",
+        "php",
+        "supabase"
+      ],
+      "representativeQueries": [
+        "Who is Mario Mendoza (@marioswc) and what is his technical stack?",
+        "What web development projects and experience does Mario Alberto Mendoza Cáceres have?",
+        "How can I contact or hire Mario Mendoza as a Full-Stack Software Developer?"
+      ],
+      "updatedAt": "2026-11-24T00:00:00Z"
+    }
+  ]
+}

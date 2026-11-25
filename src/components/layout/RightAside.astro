@@ -2,14 +2,33 @@
 import CardAside from "../ui/CardAside.astro";
 import GitHub from "./rightside/GitHub.astro";
 import Social from "./rightside/Social.astro";
-import { useTranslations } from "@i18n/utils";
+import { getLang, useTranslations } from "@i18n/utils";
 
+const lang = getLang(Astro.currentLocale);
 const t = useTranslations(Astro.currentLocale);
+const skeletonLabels = [
+    t("github.lastPush"),
+    t("github.totalRepos"),
+    t("github.followers"),
+    t("github.topLanguage"),
+];
 ---
 
 <aside aria-label={t("aside.rightAria")} class="sticky top-0 p-2 hidden lg:flex flex-col gap-2 items-start w-full">
     <CardAside>
-        <GitHub />
+        <GitHub server:defer lang={lang}>
+            <div slot="fallback" class="w-full">
+                <h2 class="text-xl font-extrabold text-text mb-1">{t("github.title")}</h2>
+                <div class="flex flex-col gap-4 items-start motion-safe:animate-pulse">
+                    {skeletonLabels.map((label) => (
+                        <div class="flex flex-col items-start gap-1">
+                            <span class="text-muted text-sm leading-4">{label}</span>
+                            <span class="h-6 w-24 rounded-md bg-line/80" />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </GitHub>
     </CardAside>
     <CardAside>
         <Social />

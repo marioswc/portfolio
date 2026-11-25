@@ -1,17 +1,163 @@
 ---
-import { useTranslations } from "@i18n/utils";
+import { Image } from "astro:assets";
+import { getLang, useTranslations } from "@i18n/utils";
+import { env } from "cloudflare:workers";
 
-const t = useTranslations(Astro.currentLocale);
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const lang = getLang(propLang ?? Astro.currentLocale);
+const t = useTranslations(lang);
+
+// Cache en el Edge de Cloudflare por 60 segundos y sirve stale mientras revalida por 2 min
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, s-maxage=60, stale-while-revalidate=120"
+);
+
+const runtimeEnv = (env ?? {}) as Record<string, string | undefined>;
+const lastFmUser =
+  runtimeEnv.LAST_FM_USERNAME || import.meta.env.LAST_FM_USERNAME || "";
+const lastFmApiKey =
+  runtimeEnv.LAST_FM_API_KEY || import.meta.env.LAST_FM_API_KEY || "";
+const lastFmMethod = "user.getrecenttracks";
+const lastFmApiUrl = `https://ws.audioscrobbler.com/2.0/?method=${lastFmMethod}&user=${lastFmUser}&api_key=${lastFmApiKey}&format=json&limit=2`;
+
+type RawLastFmTrack = {
+  title: string;
+  artist: string;
+  cover: string;
+  uts?: string;
+};
+
+const CACHE_TTL_MS = 60 * 1000; // 60 segundos
+
+const globalCache = globalThis as unknown as {
+  __lastFmTrackCache?: { data: RawLastFmTrack; expiresAt: number };
+};
+
+function formatTimeAgo(uts: string | undefined, locale: string): string {
+  if (!uts) return t("music.timeAgo");
+
+  const diffInSeconds = Math.max(
+    0,
+    Math.floor(Date.now() / 1000) - Number(uts),
+  );
+  const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "always" });
+
+  if (diffInSeconds < 60) {
+    return rtf.format(-diffInSeconds, "second");
+  }
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  if (diffInMinutes < 60) {
+    return rtf.format(-diffInMinutes, "minute");
+  }
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) {
+    return rtf.format(-diffInHours, "hour");
+  }
+  const diffInDays = Math.floor(diffInHours / 24);
+  return rtf.format(-diffInDays, "day");
+}
+
+async function getLastFmData() {
+  const now = Date.now();
+  const cached = globalCache.__lastFmTrackCache;
+
+  // 1. Si el caché en memoria sigue vigente, reutilizar el track y recalcular timeAgo para el idioma actual
+  if (cached && now < cached.expiresAt) {
+    return {
+      ...cached.data,
+      timeAgo: formatTimeAgo(cached.data.uts, lang),
+    };
+  }
+
+  try {
+    const fetchOptions: RequestInit & { cf?: Record<string, unknown> } = {
+      headers: {
+        "User-Agent": "mariosdev-portfolio",
+      },
+      cf: {
+        cacheTtl: 60,
+        cacheEverything: true,
+      },
+    };
+
+    const res = await fetch(lastFmApiUrl, fetchOptions);
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch Last.fm data: ${res.status} ${res.statusText}`,
+      );
+    }
+    const data = await res.json();
+    const tracks = data.recenttracks?.track;
+    if (!tracks || tracks.length === 0) return null;
+
+    // verify if the track is currently playing
+    const isNowPlaying = tracks[0]["@attr"]?.nowplaying === "true";
+    const lastPlayedTrack = isNowPlaying ? tracks[1] : tracks[0];
+    if (!lastPlayedTrack) return null;
+
+    const rawTrack: RawLastFmTrack = {
+      title: lastPlayedTrack.name,
+      artist: lastPlayedTrack.artist["#text"],
+      cover: lastPlayedTrack.image[2]["#text"],
+      uts: lastPlayedTrack.date?.uts,
+    };
+
+    // 2. Guardar en caché por 60 segundos
+    globalCache.__lastFmTrackCache = {
+      data: rawTrack,
+      expiresAt: now + CACHE_TTL_MS,
+    };
+
+    return {
+      ...rawTrack,
+      timeAgo: formatTimeAgo(rawTrack.uts, lang),
+    };
+  } catch (error) {
+    console.error("Error fetching Last.fm data:", error);
+    if (cached?.data) {
+      return {
+        ...cached.data,
+        timeAgo: formatTimeAgo(cached.data.uts, lang),
+      };
+    }
+    return null;
+  }
+}
+
+const {
+  title = t("music.songTitle"),
+  artist = t("music.artistName"),
+  cover = "",
+  timeAgo = t("music.timeAgo"),
+} = (await getLastFmData()) ?? {};
 ---
 
-<h2 class="text-xl font-extrabold text-text mb-1">{t("music.title")}</h2>
 <div class="flex items-center justify-start gap-2">
-    <figure class="flex size-16 rounded-lg overflow-hidden shadow-sm">
-        <span class="size-full bg-green-500"></span>
-    </figure>
-    <div class="flex flex-col items-start ml-2">
-        <span class="text-text text-lg font-extrabold font-geist tracking-tight">{t("music.songTitle")}</span>
-        <small class="text-muted text-xs leading-4">{t("music.artistName")}</small>
-        <small class="text-muted text-xs">{t("music.timeAgo")}</small>
-    </div>
+  <figure class="flex size-16 shrink-0 rounded-lg overflow-hidden shadow-sm">
+    {cover ? (
+      <Image
+        src={cover}
+        alt={title}
+        width={64}
+        height={64}
+        class="size-full object-cover"
+        loading="eager"
+        decoding="async"
+      />
+    ) : (
+      <span class="size-full bg-green-500"></span>
+    )}
+  </figure>
+  <div class="flex flex-col items-start ml-2">
+    <span class="text-text text-lg font-extrabold font-geist tracking-tight">
+      {title}
+    </span>
+    <small class="text-muted text-xs leading-4">{artist}</small>
+    <small class="text-muted text-xs">{timeAgo}</small>
+  </div>
 </div>

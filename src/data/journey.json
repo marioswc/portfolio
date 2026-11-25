@@ -30,6 +30,26 @@
         }
     },
     {
+        "year": 2026,
+        "title": {
+            "en": "Participated in the 2026 NASA Space Apps Challenge",
+            "es": "Participé en el NASA Space Apps Challenge 2026"
+        },
+        "important": {
+            "en": "Galactic Problem Solver",
+            "es": "Galactic Problem Solver"
+        },
+        "comment": {
+            "en": "recognized for outstanding participation and efforts to address challenges we face on Earth and in space.",
+            "es": "reconocido por una destacada participación y esfuerzos para abordar desafíos que enfrentamos en la Tierra y en el espacio."
+        },
+        "image": "nasa-space-apps-2026.webp",
+        "imageAlt": {
+            "en": "2026 NASA Space Apps Challenge Galactic Problem Solver Certificate",
+            "es": "Certificado Galactic Problem Solver del NASA Space Apps Challenge 2026"
+        }
+    },
+    {
         "year": 2025,
         "title": {
             "en": "Working on freelance projects",

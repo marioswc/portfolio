@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { useTranslations } from "@i18n/utils";
+import Social from "../rightside/Social.astro";
 
 const t = useTranslations(Astro.currentLocale);
 ---
@@ -32,4 +33,5 @@ const t = useTranslations(Astro.currentLocale);
             <span class="text-sm">{t("profile.status")}</span>
         </div>
     </div>
+    <Social variant="profile" />
 </div>

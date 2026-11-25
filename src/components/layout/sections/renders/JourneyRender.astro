@@ -1,20 +1,53 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import Journey from "@data/journey.json";
 import CardSection from "@components/ui/CardSection.astro";
 import { getLang, useTranslations } from "@i18n/utils";
 
 const lang = getLang(Astro.currentLocale);
 const t = useTranslations(Astro.currentLocale);
+
+const journeyImages = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/images/journey/*.{webp,png,jpg,jpeg}",
+  { eager: true },
+);
+
+const getJourneyImage = (filename?: string) =>
+  filename
+    ? journeyImages[`/src/assets/images/journey/${filename}`]?.default
+    : undefined;
 ---
 
 {
-  Journey.map((item) => (
-    <CardSection pinned={false} year={item.year} load="lazy">
-      <div>
-        <h3 class="inline font-inter tracking-normal font-medium text-sm text-text">
-          {item.title[lang]} {t("journey.as")} {item.important[lang]}
-        </h3>, {item.comment[lang]}
-      </div>
-    </CardSection>
-  ))
+  Journey.map((item) => {
+    const journeyImage = getJourneyImage(item.image);
+    return (
+      <CardSection pinned={false} year={item.year} load="lazy">
+        <div>
+          <h3 class="inline font-inter tracking-normal font-medium text-sm text-text">
+            {item.title[lang]} {t("journey.as")} {item.important[lang]}
+          </h3>, {item.comment[lang]}
+        </div>
+        {
+          journeyImage && (
+            <figure class="mt-2 border border-line shadow-xs max-w-md overflow-hidden rounded-lg">
+              <Image
+                src={journeyImage}
+                alt={item.imageAlt?.[lang] ?? item.title[lang]}
+                width={896}
+                widths={[448, 896]}
+                sizes="(max-width: 640px) 100vw, 448px"
+                class="object-cover w-full h-auto block"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+                fetchpriority="low"
+              />
+            </figure>
+          )
+        }
+      </CardSection>
+    );
+  })
 }

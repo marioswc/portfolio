@@ -53,23 +53,43 @@ const tabs = [
 </div>
 
 <script>
-  const btns = document.querySelectorAll("#tab-menu button");
-  const panels = document.querySelectorAll("[role=tabpanel]");
+  const btns = document.querySelectorAll<HTMLButtonElement>("#tab-menu button");
+  const panels = document.querySelectorAll<HTMLElement>("[role=tabpanel]");
+  const validTabs = new Set(Array.from(btns, (btn) => btn.id));
+
+  const activateTab = (tabId: string, updateHash = false) => {
+    const targetId = validTabs.has(tabId) ? tabId : "overview";
+
+    btns.forEach((btn) => {
+      btn.setAttribute("aria-selected", String(btn.id === targetId));
+    });
+
+    panels.forEach((panel) => {
+      panel.classList.toggle("hidden", panel.id !== `panel-${targetId}`);
+    });
+
+    if (updateHash) {
+      const nextUrl =
+        targetId === "overview"
+          ? `${window.location.pathname}${window.location.search}`
+          : `#${targetId}`;
+      history.replaceState(null, "", nextUrl);
+    }
+  };
+
+  const initialHash = window.location.hash.slice(1);
+  if (initialHash && validTabs.has(initialHash)) {
+    activateTab(initialHash, false);
+  }
 
   btns.forEach((btnSelected) => {
     btnSelected.addEventListener("click", () => {
-      // disable buttons except the selected one
-      btns.forEach((btn) => {
-        btn === btnSelected
-          ? btn.setAttribute("aria-selected", "true")
-          : btn.setAttribute("aria-selected", "false");
-      });
-      //show the selected tab panel and hide others
-      panels.forEach((panel) => {
-        panel.id === `panel-${btnSelected.id}`
-          ? panel.classList.remove("hidden")
-          : panel.classList.add("hidden");
-      });
+      activateTab(btnSelected.id, true);
     });
+  });
+
+  window.addEventListener("hashchange", () => {
+    const hashTab = window.location.hash.slice(1);
+    activateTab(hashTab || "overview", false);
   });
 </script>

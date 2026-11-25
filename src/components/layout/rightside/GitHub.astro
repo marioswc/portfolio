@@ -1,36 +1,133 @@
 ---
-import { useTranslations } from "@i18n/utils";
+import { getLang, useTranslations } from "@i18n/utils";
 
-const t = useTranslations(Astro.currentLocale);
+interface Props {
+  lang?: string;
+}
 
+const { lang: propLang } = Astro.props;
+const lang = getLang(propLang ?? Astro.currentLocale);
+const t = useTranslations(lang);
+
+// cache control for Cloudflare
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, s-maxage=300, stale-while-revalidate=600"
+);
+
+const userUrl = "https://api.github.com/users/marioswc";
+const reposUrl =
+  "https://api.github.com/users/marioswc/repos?sort=pushed&per_page=100";
+
+const ghHeaders: HeadersInit = {
+  Accept: "application/vnd.github.v3+json",
+  "User-Agent": "mariosdev-portfolio",
+};
+
+type GitHubStats = {
+  lastPush: string;
+  totalRepos: number;
+  followers: number;
+  topLang: string;
+};
+
+const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos
+
+// Global cache to store GitHub stats and their expiration time
+const globalCache = globalThis as unknown as {
+  __ghStatsCache?: { data: GitHubStats; expiresAt: number };
+};
+
+const FALLBACK_STATS: GitHubStats = {
+  lastPush: "portfolio",
+  totalRepos: 10,
+  followers: 10,
+  topLang: "JavaScript",
+};
+
+async function getGitHubInfo(): Promise<GitHubStats> {
+  const now = Date.now();
+  const cached = globalCache.__ghStatsCache;
+
+  // if cached data exists and is still valid, return it
+  if (cached && now < cached.expiresAt) {
+    return cached.data;
+  }
+
+  try {
+    // options for fetch, including cache settings for Cloudflare
+    const fetchOptions: RequestInit & { cf?: Record<string, unknown> } = {
+      headers: ghHeaders,
+      cf: {
+        cacheTtl: 300,
+        cacheEverything: true,
+      },
+    };
+
+    const [userRes, reposRes] = await Promise.all([
+      fetch(userUrl, fetchOptions),
+      fetch(reposUrl, fetchOptions),
+    ]);
+
+    if (!userRes.ok || !reposRes.ok) {
+      throw new Error(`Failed to fetch GitHub info (${userRes.status} / ${reposRes.status})`);
+    }
+
+    const user = await userRes.json();
+    const repos = await reposRes.json();
+
+    // Count the number of repositories for each language
+    const langCounter: Record<string, number> = {};
+    for (const repo of repos) {
+      if (repo.language && !repo.fork) {
+        langCounter[repo.language] = (langCounter[repo.language] || 0) + 1;
+      }
+    }
+
+    // Sort the lang counter
+    const topLang =
+      Object.entries(langCounter).sort((a, b) => b[1] - a[1])[0]?.[0] ??
+      FALLBACK_STATS.topLang;
+
+    const freshData: GitHubStats = {
+      lastPush: repos[0]?.name ?? FALLBACK_STATS.lastPush,
+      totalRepos: user.public_repos ?? repos.length,
+      followers: user.followers ?? FALLBACK_STATS.followers,
+      topLang,
+    };
+
+    // Store in cache
+    globalCache.__ghStatsCache = {
+      data: freshData,
+      expiresAt: now + CACHE_TTL_MS,
+    };
+
+    return freshData;
+  } catch (error) {
+    console.error(error);
+    // if fetching fails, return cached data if available, otherwise fallback
+    return cached?.data ?? FALLBACK_STATS;
+  }
+}
+
+const githubInfo = await getGitHubInfo();
 const dataGit = [
-  {
-    label: t("github.lastPush"),
-    value: "portfolio",
-  },
-  {
-    label: t("github.totalRepos"),
-    value: "10",
-  },
-  {
-    label: t("github.followers"),
-    value: "10",
-  },
-  {
-    label: t("github.topLanguage"),
-    value: "JavaScript",
-  },
+  { label: t("github.lastPush"), value: githubInfo.lastPush },
+  { label: t("github.totalRepos"), value: githubInfo.totalRepos },
+  { label: t("github.followers"), value: githubInfo.followers },
+  { label: t("github.topLanguage"), value: githubInfo.topLang },
 ];
 ---
 
 <h2 class="text-xl font-extrabold text-text mb-1">{t("github.title")}</h2>
 <div class="flex flex-col gap-4 items-start">
-    {
-        dataGit.map((data) => (
-            <div class="flex flex-col items-start">
-                <span class="text-muted text-sm leading-4">{data.label}</span>
-                <span class="text-text text-lg font-extrabold font-geist tracking-tight">{data.value}</span>
-            </div>
-        ))
-    }
+  {dataGit.map((data) => (
+    <div class="flex flex-col items-start">
+      <span class="text-muted text-sm leading-4">{data.label}</span>
+      <span class="text-text text-lg font-extrabold font-geist tracking-tight">
+        {data.value}
+      </span>
+    </div>
+  ))}
 </div>
+
