@@ -1,6 +1,6 @@
 # Mario Alberto Mendoza Cáceres (@marioswc)
 
-> Full-Stack Software Developer and Computer Systems Engineer (Ingeniero en Sistemas Computacionales) based in Mexico. Focused on understanding the real problem first and building clean, responsive, and maintainable web applications using Laravel, PHP, JavaScript, React, Node.js, Tailwind CSS, and SQL databases. Currently open to hire.
+> Full-Stack Software Developer and Computer Systems Engineer (Ingeniero en Sistemas Computacionales) based in Mexico. Focused on understanding the real problem first and building clean, responsive, and maintainable web and cross-platform applications using Laravel, PHP, JavaScript, TypeScript, React, React Native, Astro, Node.js, Tailwind CSS, MySQL, PostgreSQL, and Supabase. Currently open to hire.
 
 ## Profile & Contact
 
@@ -18,9 +18,10 @@
 
 ## Technical Skills & Stack
 
-- **Frontend**: HTML, CSS, JavaScript, React, Astro, Tailwind CSS, Alpine.js
-- **Backend**: PHP, Laravel, Node.js, Python
-- **Databases**: MySQL, PostgreSQL
+- **Frontend**: HTML, CSS, Tailwind CSS, React, React Native, Astro, Alpine.js
+- **Languages**: JavaScript, TypeScript, PHP
+- **Backend**: PHP, Laravel, Node.js
+- **Databases & BaaS**: MySQL, PostgreSQL, Supabase
 - **Tools & Infrastructure**: Git, GitHub, Docker, Vite
 
 ## Professional Experience
@@ -36,9 +37,14 @@
 
 ## Featured Projects
 
-- **[DSAC System](https://github.com/marioswc/dsac)** (2026) — Web platform for managing clients, appointments, services, and tax/accounting files for an accounting firm. Built with Laravel, PHP, MySQL, Tailwind CSS, and Alpine.js. Features public landing page, client tax & file management, multi-status appointment scheduling flow, PDF generation, email notifications, dynamic service catalog, and role-based admin portals.
+- **[DSAC System](https://github.com/marioswc/dsac)** (2026) — Accounting management system built with Laravel, PHP, MySQL, Tailwind CSS, and Alpine.js featuring authentication, role management, appointment scheduling, PDF generation, email notifications, and document uploads.
+- **[Plate | Multiplatform App](https://github.com/marioswc)** (2026) — Multiplatform training tracker and social fitness app inspired by Hevy, built with React Native and connected to Supabase and a public gym exercises API.
 - **[DailyQuo](https://dailyquo.vercel.app/)** (2026) — Minimalist web application that delivers a single inspirational quote for each day of the year, built in React and JavaScript with external API integration, day-of-year quote mapping, automatic midnight rollover, local storage caching, debounced clipboard copy, and modular hook architecture. Source code: [https://github.com/marioswc/dailyquo](https://github.com/marioswc/dailyquo)
 - **[TaskFlow](https://to-do-list-ten-bay-47.vercel.app/)** (2026) — Fast, zero-dependency task management web application built with modular vanilla JavaScript, HTML, Tailwind CSS, and Vite. Features seamless task CRUD, persistent browser storage, and context-aware empty states. Source code: [https://github.com/marioswc/to-do-list](https://github.com/marioswc/to-do-list)
+
+## Awards & Recognition
+
+- **2026 NASA Space Apps Challenge — Galactic Problem Solver** (November 2026): Recognized for outstanding participation and efforts to address challenges we face on Earth and in space.
 
 ## Languages
 

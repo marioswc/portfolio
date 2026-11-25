@@ -8,8 +8,8 @@ export const defaultLang: Lang = "en";
 
 const en = {
   "site.title": "Mario Mendoza | Software Developer",
-  "site.description": "Full-Stack Software Developer & Computer Systems Engineer in Mexico. Building web applications with Laravel, PHP, JavaScript, React, Tailwind CSS, and SQL.",
-  "site.keywords": "Mario Mendoza, Mario Alberto Mendoza Cáceres, marioswc, Software Developer, Full-Stack Developer, Web Developer, Laravel, PHP, JavaScript, React, Tailwind CSS, MySQL, PostgreSQL, Node.js, Computer Systems Engineer, Mexico",
+  "site.description": "Full-Stack Software Developer & Computer Systems Engineer in Mexico. Building web and cross-platform apps with Laravel, PHP, JavaScript, TypeScript, React, React Native, Astro, Tailwind CSS, Node.js, MySQL, PostgreSQL, and Supabase.",
+  "site.keywords": "Mario Mendoza, Mario Alberto Mendoza Cáceres, marioswc, Software Developer, Full-Stack Developer, Web Developer, Laravel, PHP, JavaScript, TypeScript, React, React Native, Astro, Tailwind CSS, Supabase, MySQL, PostgreSQL, Node.js, Docker, Computer Systems Engineer, Mexico",
   "header.role": "Software Developer",
   "profile.bannerAlt": "Profile banner",
   "profile.pictureAlt": "Profile",
@@ -77,8 +77,8 @@ const en = {
 
 const es: typeof en = {
   "site.title": "Mario Mendoza | Desarrollador de Software",
-  "site.description": "Desarrollador de Software Full-Stack e Ingeniero en Sistemas en México. Creando aplicaciones web con Laravel, PHP, JavaScript, React, Tailwind CSS y SQL.",
-  "site.keywords": "Mario Mendoza, Mario Alberto Mendoza Cáceres, marioswc, Desarrollador de Software, Desarrollador Full-Stack, Desarrollador Web, Laravel, PHP, JavaScript, React, Tailwind CSS, MySQL, PostgreSQL, Node.js, Ingeniero en Sistemas Computacionales, México",
+  "site.description": "Desarrollador de Software Full-Stack e Ingeniero en Sistemas en México. Creando aplicaciones web y multiplataforma con Laravel, PHP, JavaScript, TypeScript, React, React Native, Astro, Tailwind CSS, Node.js, MySQL, PostgreSQL y Supabase.",
+  "site.keywords": "Mario Mendoza, Mario Alberto Mendoza Cáceres, marioswc, Desarrollador de Software, Desarrollador Full-Stack, Desarrollador Web, Laravel, PHP, JavaScript, TypeScript, React, React Native, Astro, Tailwind CSS, Supabase, MySQL, PostgreSQL, Node.js, Docker, Ingeniero en Sistemas Computacionales, México",
   "header.role": "Desarrollador de Software",
   "profile.bannerAlt": "Banner de perfil",
   "profile.pictureAlt": "Perfil",

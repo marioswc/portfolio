@@ -20,15 +20,19 @@
         "full-stack",
         "laravel",
         "react",
+        "react-native",
+        "typescript",
         "javascript",
-        "php"
+        "astro",
+        "php",
+        "supabase"
       ],
       "representativeQueries": [
         "Who is Mario Mendoza (@marioswc) and what is his technical stack?",
         "What web development projects and experience does Mario Alberto Mendoza Cáceres have?",
         "How can I contact or hire Mario Mendoza as a Full-Stack Software Developer?"
       ],
-      "updatedAt": "2026-11-21T00:00:00Z"
+      "updatedAt": "2026-11-24T00:00:00Z"
     }
   ]
 }
