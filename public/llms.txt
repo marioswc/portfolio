@@ -8,7 +8,7 @@
 - **Handle**: `@marioswc`
 - **Role**: Full-Stack Software Developer / Junior Software Developer
 - **Status**: Open to hire
-- **Location**: Mexico City / Yucatán, Mexico
+- **Location**: Yucatán, Mexico
 - **Email**: [mario.mendozac@icloud.com](mailto:mario.mendozac@icloud.com)
 - **Portfolio (English)**: [https://mariosdev.me/](https://mariosdev.me/)
 - **Portfolio (Spanish)**: [https://mariosdev.me/es/](https://mariosdev.me/es/)
