@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getLang, useTranslations } from "@i18n/utils";
 import { env } from "cloudflare:workers";
 
@@ -134,11 +135,14 @@ const {
 <div class="flex items-center justify-start gap-2">
   <figure class="flex size-16 shrink-0 rounded-lg overflow-hidden shadow-sm">
     {cover ? (
-      <img
+      <Image
         src={cover}
         alt={title}
+        width={64}
+        height={64}
         class="size-full object-cover"
-        loading="lazy"
+        loading="eager"
+        decoding="async"
       />
     ) : (
       <span class="size-full bg-green-500"></span>
