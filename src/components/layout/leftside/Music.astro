@@ -3,8 +3,13 @@ import { Image } from "astro:assets";
 import { getLang, useTranslations } from "@i18n/utils";
 import { env } from "cloudflare:workers";
 
-const lang = getLang(Astro.currentLocale);
-const t = useTranslations(Astro.currentLocale);
+interface Props {
+  lang?: string;
+}
+
+const { lang: propLang } = Astro.props;
+const lang = getLang(propLang ?? Astro.currentLocale);
+const t = useTranslations(lang);
 
 // Cache en el Edge de Cloudflare por 60 segundos y sirve stale mientras revalida por 2 min
 Astro.response.headers.set(
