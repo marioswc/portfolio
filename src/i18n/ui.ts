@@ -69,6 +69,10 @@ const en = {
   "social.open": "Open",
   "footer.rights": "All rights reserved",
   "modal.close": "Close",
+  "404.title": "This page doesn't exist",
+  "404.description": "The link may be broken or the page may have been moved. Let's get you back to the profile.",
+  "404.backHome": "Back to profile",
+  "404.back": "Go back",
 };
 
 const es: typeof en = {
@@ -134,6 +138,10 @@ const es: typeof en = {
   "social.open": "Abrir",
   "footer.rights": "Todos los derechos reservados",
   "modal.close": "Cerrar",
+  "404.title": "Esta página no existe",
+  "404.description": "Puede que el enlace esté roto o que la página se haya movido. Volvamos al perfil.",
+  "404.backHome": "Volver al perfil",
+  "404.back": "Regresar",
 };
 
 export const ui = { en, es } as const;
