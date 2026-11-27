@@ -17,7 +17,7 @@ Astro.response.headers.set(
 
 const userUrl = "https://api.github.com/users/marioswc";
 const reposUrl =
-  "https://api.github.com/users/marioswc/repos?sort=pushed&per_page=100";
+  "https://api.github.com/users/marioswc/repos?sort=pushed&per_page=1";
 
 const ghHeaders: HeadersInit = {
   Accept: "application/vnd.github.v3+json",
@@ -26,9 +26,10 @@ const ghHeaders: HeadersInit = {
 
 type GitHubStats = {
   lastPush: string;
+  lastPushUrl: string;
   totalRepos: number;
   followers: number;
-  topLang: string;
+  lastLanguage: string;
 };
 
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutos
@@ -40,9 +41,10 @@ const globalCache = globalThis as unknown as {
 
 const FALLBACK_STATS: GitHubStats = {
   lastPush: "portfolio",
+  lastPushUrl: "https://github.com/marioswc/portfolio",
   totalRepos: 10,
   followers: 10,
-  topLang: "JavaScript",
+  lastLanguage: "Astro",
 };
 
 async function getGitHubInfo(): Promise<GitHubStats> {
@@ -75,25 +77,14 @@ async function getGitHubInfo(): Promise<GitHubStats> {
 
     const user = await userRes.json();
     const repos = await reposRes.json();
-
-    // Count the number of repositories for each language
-    const langCounter: Record<string, number> = {};
-    for (const repo of repos) {
-      if (repo.language && !repo.fork) {
-        langCounter[repo.language] = (langCounter[repo.language] || 0) + 1;
-      }
-    }
-
-    // Sort the lang counter
-    const topLang =
-      Object.entries(langCounter).sort((a, b) => b[1] - a[1])[0]?.[0] ??
-      FALLBACK_STATS.topLang;
+    const latestRepo = repos[0];
 
     const freshData: GitHubStats = {
-      lastPush: repos[0]?.name ?? FALLBACK_STATS.lastPush,
-      totalRepos: user.public_repos ?? repos.length,
+      lastPush: latestRepo?.name ?? FALLBACK_STATS.lastPush,
+      lastPushUrl: latestRepo?.html_url ?? FALLBACK_STATS.lastPushUrl,
+      totalRepos: user.public_repos ?? FALLBACK_STATS.totalRepos,
       followers: user.followers ?? FALLBACK_STATS.followers,
-      topLang,
+      lastLanguage: latestRepo?.language ?? FALLBACK_STATS.lastLanguage,
     };
 
     // Store in cache
@@ -112,10 +103,10 @@ async function getGitHubInfo(): Promise<GitHubStats> {
 
 const githubInfo = await getGitHubInfo();
 const dataGit = [
-  { label: t("github.lastPush"), value: githubInfo.lastPush },
+  { label: t("github.lastPush"), value: githubInfo.lastPush, href: githubInfo.lastPushUrl },
   { label: t("github.totalRepos"), value: githubInfo.totalRepos },
   { label: t("github.followers"), value: githubInfo.followers },
-  { label: t("github.topLanguage"), value: githubInfo.topLang },
+  { label: t("github.topLanguage"), value: githubInfo.lastLanguage },
 ];
 ---
 
@@ -124,9 +115,20 @@ const dataGit = [
   {dataGit.map((data) => (
     <div class="flex flex-col items-start">
       <span class="text-muted text-sm leading-4">{data.label}</span>
-      <span class="text-text text-lg font-extrabold font-geist tracking-tight">
-        {data.value}
-      </span>
+      {data.href ? (
+        <a
+          href={data.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-text text-lg font-extrabold font-geist tracking-tight hover:text-primary hover:underline underline-offset-2 transition-colors duration-200"
+        >
+          {data.value}
+        </a>
+      ) : (
+        <span class="text-text text-lg font-extrabold font-geist tracking-tight">
+          {data.value}
+        </span>
+      )}
     </div>
   ))}
 </div>
